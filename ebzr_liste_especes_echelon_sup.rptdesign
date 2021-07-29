@@ -1,0 +1,1596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[ECHELON_SUP="default"
+
+if(params["FileObs"]!="") {
+	// Périmetre personnalisé
+	reportContext.getDesignHandle().findElement("EBZR_ListeEspecesEchelonSup_Tab").setProperty("dataSet", "tabPerso");
+	importPackage(java.io);
+	br = new BufferedReader(new FileReader("./webapps/birt/report/listeobs/" + params["FileObs"] + ".wkt"));
+	geomObs = br.readLine();
+	GEOMOBS = geomObs;
+	br.close();
+	ECHELON_SUP = "Perso";
+}
+
+if(params["FileZonage"]!="") {
+	importPackage(java.io);
+	br = new BufferedReader(new FileReader("./webapps/birt/report/listezonage/" + params["FileZonage"]));
+	idZonage = br.readLine();
+	reportContext.setPageVariable("ListeIdZonage", idZonage);
+	br.close();
+}
+
+if(params["Tbl_Echelon"]!="") {
+	// Echlon de 2 à N
+	reportContext.getDesignHandle().findElement("EBZR_ListeEspecesEchelonSup_Tab").setProperty("dataSet", "tabEchelon");
+}]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="ID_Zonage" id="211">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <expression name="sortByColumn">dataSetRow["gez_id_geom_zonage"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">1500000127</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Nom_Table" id="958">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">tv_taxon_observe_commune</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pdf" id="976">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">f</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="FileObs" id="1974">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Tbl_Echelon" id="1970">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="FileZonage" id="2117">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Sigogne3" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="tab" id="707">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[this.queryText = this.queryText.replace("base_table", params["Nom_Table"]);
+this.queryText = this.queryText.replace("base_geom", params["Nom_Table"].replace("tv_taxon_observe_", "tv_geom_zonages_"));
+this.queryText = this.queryText.replace("echelon_table", ECHELON_SUP.replace("tv_geom_zonages_", "tv_taxon_observe_"));
+this.queryText = this.queryText.replace("echelon_geom", ECHELON_SUP);
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet"/>
+            <xml-property name="queryText"><![CDATA[SELECT
+row_number() over(ORDER BY (CASE 
+	WHEN e.sta_nom_statut LIKE 'RE%' THEN '8' 
+	WHEN e.sta_nom_statut LIKE 'CR%' THEN '7'
+	WHEN e.sta_nom_statut LIKE 'EN%' THEN '6'  
+	WHEN e.sta_nom_statut LIKE 'VU%' THEN '5' 
+	END) DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC),
+ gta_nom_groupe_taxonomique,
+ tax_nom_vern,tax_nom_complet,
+ sta_nom_statut,
+array_to_string(array_agg(distinct('<a href="' || tae_url || '">' || tae_intitule || '</a> (' || tae_article || ')')), ', ') as tae_intitule,
+array_to_string(array_agg(distinct(tae_article)),' - ') as tae_article,
+ MAX(SUBSTRING(ota_date_debut FOR 4)) as date_max
+,(CASE 
+	WHEN e.sta_nom_statut LIKE 'RE%' THEN '8' 
+	WHEN sta_nom_statut LIKE 'CR%' THEN '7'
+	WHEN sta_nom_statut LIKE 'EN%' THEN '6'  
+	WHEN sta_nom_statut LIKE 'VU%' THEN '5'
+	END 
+) AS toto 
+
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique
+JOIN t_taxref d ON a.tao_id_taxon = d.tax_id_taxref
+JOIN tv_taxon_menace e ON a.tao_id_taxon = e.tao_id_taxon
+JOIN tj_taxref_protection f ON d.tax_id_taxref = f.tax_id_taxref
+JOIN t_taxref_reglementation g ON f.tae_cd_protection = g.tae_cd_protection
+
+INNER JOIN echelon_table c ON a.tao_id_taxon = c.tao_id_taxon
+INNER JOIN echelon_geom geom_a ON c.gez_id_geom_zonage = geom_a.gez_id_geom_zonage
+INNER JOIN base_geom geom_b ON ST_INTERSECTS(geom_a.gez_geometry, geom_b.gez_geometry)
+WHERE geom_b.gez_id_geom_zonage = ?
+AND c.tao_id_taxon NOT IN (SELECT tao_id_taxon FROM base_table WHERE gez_id_geom_zonage in ListeIdZonage)
+
+AND (f.tae_cd_protection IN('NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NMO2','NMO3','NMO4','NM2','NO3','NO4','NP1','NV1','NV2','RV43') AND sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+AND (sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+
+GROUP BY gta_nom_groupe_taxonomique,tax_nom_vern,tax_nom_complet,sta_nom_statut
+ORDER BY toto DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_nom_groupe_taxonomique</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_nom_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_nom_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_vern</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_vern</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_vern</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_complet</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_complet</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_complet</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sta_nom_statut</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sta_nom_statut</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sta_nom_statut</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_arrete</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_arrete</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_arrete</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_url</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_url</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_url</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_article</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_article</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_article</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_max</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_max</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_max</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="tabPerso" id="977">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">tao_id_taxon</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">tao_id_taxon</text-property>
+                    <text-property name="heading">tao_id_taxon</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">row_number</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">row_number</text-property>
+                    <text-property name="heading">row_number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">gta_nom_groupe_taxonomique</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">gta_nom_groupe_taxonomique</text-property>
+                    <text-property name="heading">gta_nom_groupe_taxonomique</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tax_nom_vern</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tax_nom_vern</text-property>
+                    <text-property name="heading">tax_nom_vern</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tax_nom_complet</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tax_nom_complet</text-property>
+                    <text-property name="heading">tax_nom_complet</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sta_nom_statut</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">sta_nom_statut</text-property>
+                    <text-property name="heading">sta_nom_statut</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tae_intitule</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tae_intitule</text-property>
+                    <text-property name="heading">tae_intitule</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tae_article</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tae_article</text-property>
+                    <text-property name="heading">tae_article</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tae_url</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tae_url</text-property>
+                    <text-property name="heading">tae_url</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date_max</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_max</text-property>
+                    <text-property name="heading">date_max</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">toto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">toto</text-property>
+                    <text-property name="heading">toto</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tao_id_taxon_1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">tao_id_taxon</text-property>
+                    <text-property name="heading">tao_id_taxon</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tao_id_taxon</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">row_number</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">gta_nom_groupe_taxonomique</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tax_nom_vern</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">tax_nom_complet</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">sta_nom_statut</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tae_intitule</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">tae_article</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">tae_url</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">date_max</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">toto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">tao_id_taxon_1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('WKTArea', GEOMOBS);]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tao_id_taxon</property>
+                    <property name="nativeName">tao_id_taxon</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">row_number</property>
+                    <property name="nativeName">row_number</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">gta_nom_groupe_taxonomique</property>
+                    <property name="nativeName">gta_nom_groupe_taxonomique</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tax_nom_vern</property>
+                    <property name="nativeName">tax_nom_vern</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">tax_nom_complet</property>
+                    <property name="nativeName">tax_nom_complet</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">sta_nom_statut</property>
+                    <property name="nativeName">sta_nom_statut</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tae_intitule</property>
+                    <property name="nativeName">tae_intitule</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">tae_article</property>
+                    <property name="nativeName">tae_article</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">tae_url</property>
+                    <property name="nativeName">tae_url</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">date_max</property>
+                    <property name="nativeName">date_max</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">toto</property>
+                    <property name="nativeName">toto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">tao_id_taxon_1</property>
+                    <property name="nativeName">tao_id_taxon</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[WITH area AS (
+	-- On calcule la surface en rouge
+	SELECT ST_Difference(ST_Union(b.gez_geometry), St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)) as geom
+	FROM tv_geom_zonages_maille5 b
+	WHERE ST_Intersects(b.gez_geometry, St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))
+)
+SELECT MAX(a.tao_id_taxon) AS tao_id_taxon, 
+row_number() over(ORDER BY (CASE 
+	WHEN e.sta_nom_statut like 'RE%' THEN '8' 
+	WHEN e.sta_nom_statut like 'CR%' THEN '7'
+	WHEN e.sta_nom_statut like 'EN%' THEN '6'  
+	WHEN e.sta_nom_statut like 'VU%' THEN '5' 
+	END) DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC),
+ gta_nom_groupe_taxonomique,
+ tax_nom_vern,tax_nom_complet,
+ sta_nom_statut,
+array_to_string(array_agg(distinct('<a href="' || tae_url || '">' || tae_intitule || '</a> (' || tae_article || ')')), ', ') as tae_intitule,
+array_to_string(array_agg(distinct(tae_article)),' - ') as tae_article,
+MAX(tae_url) AS tae_url,
+ MAX(SUBSTRING(ota_date_debut FOR 4)) as date_max
+,(CASE 
+	WHEN e.sta_nom_statut like 'RE%' THEN '8' 
+	WHEN sta_nom_statut like 'CR%' THEN '7'
+	WHEN sta_nom_statut like 'EN%' THEN '6'  
+	WHEN sta_nom_statut like 'VU%' THEN '5'
+	END 
+) AS toto,a.tao_id_taxon 
+
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique
+JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN t_taxref d ON a.tao_id_taxon = d.tax_id_taxref
+JOIN tv_taxon_menace e ON a.tao_id_taxon = e.tao_id_taxon
+JOIN tj_taxref_protection f ON d.tax_id_taxref = f.tax_id_taxref
+JOIN t_taxref_reglementation g ON f.tae_cd_protection = g.tae_cd_protection
+
+WHERE c.ota_id_obs_taxon IN
+(
+	SELECT ota_id_obs_taxon FROM t_localisation loc
+	INNER JOIN t_localisation_polygone geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Intersects(area.geom, geom.lpo_geometry) 
+	UNION
+	SELECT ota_id_obs_taxon FROM t_localisation loc
+	INNER JOIN t_localisation_point geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Contains(area.geom, geom.lpt_geometry) 
+	UNION
+	SELECT ota_id_obs_taxon FROM t_localisation loc
+	INNER JOIN t_localisation_ligne geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Intersects(area.geom, geom.lli_geometry) 
+)
+
+--correction loic guenin ppn 02-02-2017, exclure les especes présentes dans le dessin
+AND a.tao_id_taxon NOT IN (
+
+	SELECT tao.tao_id_taxon from t_taxon_observe tao
+	JOIN t_observation_taxon tot on tao.tao_id_taxon = tot.tao_id_taxon
+	JOIN t_localisation tl on tot.ota_id_obs_taxon = tl.ota_id_obs_taxon
+	JOIN t_localisation_polygone tlp ON tlp.loc_id_localisation = tl.loc_id_localisation
+	WHERE ST_Intersects(lpo_geometry, St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))
+	UNION
+	SELECT tao.tao_id_taxon from t_taxon_observe tao
+	JOIN t_observation_taxon tot on tao.tao_id_taxon = tot.tao_id_taxon
+	JOIN t_localisation tl on tot.ota_id_obs_taxon = tl.ota_id_obs_taxon
+	JOIN t_localisation_point tlp ON tlp.loc_id_localisation = tl.loc_id_localisation
+	WHERE ST_contains(lpt_geometry, St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))
+	UNION
+	SELECT tao.tao_id_taxon from t_taxon_observe tao
+	JOIN t_observation_taxon tot on tao.tao_id_taxon = tot.tao_id_taxon
+	JOIN t_localisation tl on tot.ota_id_obs_taxon = tl.ota_id_obs_taxon
+	JOIN t_localisation_ligne tlp ON tlp.loc_id_localisation = tl.loc_id_localisation
+	WHERE ST_Intersects(lli_geometry, St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))
+
+)
+
+AND (f.tae_cd_protection IN('NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NMO2','NMO3','NMO4','NM2','NO3','NO4','NP1','NV1','NV2','RV43') AND sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+AND (sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+
+GROUP BY gta_nom_groupe_taxonomique,tax_nom_vern,tax_nom_complet,sta_nom_statut,a.tao_id_taxon
+ORDER BY toto DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_nom_groupe_taxonomique</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_nom_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_nom_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_vern</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_vern</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_vern</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_complet</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_complet</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_complet</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sta_nom_statut</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sta_nom_statut</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sta_nom_statut</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_arrete</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_arrete</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_arrete</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_url</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_url</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_url</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_article</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_article</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_article</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_max</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_max</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_max</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="tabEchelon" id="1976">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[this.queryText = this.queryText.replace("base_geom", params["Nom_Table"].replace("tv_taxon_observe_", "tv_geom_zonages_"));
+this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].replace("tv_taxon_observe_", "tv_geom_zonages_"));
+this.queryText = this.queryText.replace("max_echelon", ECHELON_SUP);]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet"/>
+            <xml-property name="queryText"><![CDATA[WITH area AS (
+	-- Geom_a : Geom échelon N / Geom_b : Geom échelon N+1 / Geom_c : Geom plus grand échelon / On fait c-(a+b)
+	WITH geom_ab AS (
+		SELECT ST_Union(geom_a.gez_geometry) as geom
+		FROM echelon_geom geom_b
+		INNER JOIN base_geom geom_a ON ST_INTERSECTS(geom_b.gez_geometry, geom_a.gez_geometry)
+		WHERE geom_a.gez_id_geom_zonage = ?
+	)
+	SELECT ST_Difference(ST_Union(geom_c.gez_geometry), ST_Union(geom_ab.geom)) as geom
+	FROM geom_ab
+	INNER JOIN max_echelon geom_c ON ST_INTERSECTS(geom_ab.geom, geom_c.gez_geometry)
+)
+SELECT MAX(a.tao_id_taxon) as tao_id_taxon, 
+row_number() over(ORDER BY (CASE 
+	WHEN e.sta_nom_statut like 'RE%' THEN '8' 
+	WHEN e.sta_nom_statut like 'CR%' THEN '7'
+	WHEN e.sta_nom_statut like 'EN%' THEN '6'  
+	WHEN e.sta_nom_statut like 'VU%' THEN '5' 
+	END) DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC),
+ gta_nom_groupe_taxonomique,
+ tax_nom_vern,tax_nom_complet,
+ sta_nom_statut,
+array_to_string(array_agg(distinct('<a href="' || tae_url || '">' || tae_intitule || '</a> (' || tae_article || ')')), ', ') as tae_intitule,
+array_to_string(array_agg(distinct(tae_article)),' - ') as tae_article,
+MAX(tae_url) as tae_url,
+ MAX(SUBSTRING(ota_date_debut FOR 4)) as date_max
+,(CASE 
+	WHEN e.sta_nom_statut like 'RE%' THEN '8' 
+	WHEN sta_nom_statut like 'CR%' THEN '7'
+	WHEN sta_nom_statut like 'EN%' THEN '6'  
+	WHEN sta_nom_statut like 'VU%' THEN '5'
+	END 
+) AS toto 
+
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique
+JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN t_taxref d ON a.tao_id_taxon = d.tax_id_taxref
+JOIN tv_taxon_menace e ON a.tao_id_taxon = e.tao_id_taxon
+JOIN tj_taxref_protection f ON d.tax_id_taxref = f.tax_id_taxref
+JOIN t_taxref_reglementation g ON f.tae_cd_protection = g.tae_cd_protection
+
+WHERE c.ota_id_obs_taxon IN
+(
+	SELECT ota_id_obs_taxon as id FROM t_localisation loc
+	INNER JOIN t_localisation_point geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Contains(area.geom, geom.lpt_geometry)
+	UNION
+	SELECT ota_id_obs_taxon FROM t_localisation loc
+	INNER JOIN t_localisation_ligne geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Intersects(area.geom, geom.lli_geometry)
+	UNION
+	SELECT ota_id_obs_taxon FROM t_localisation loc
+	INNER JOIN t_localisation_polygone geom ON geom.loc_id_localisation = loc.loc_id_localisation
+	INNER JOIN area ON ST_Intersects(area.geom, geom.lpo_geometry)
+)
+
+AND (f.tae_cd_protection IN('NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NMO2','NMO3','NMO4','NM2','NO3','NO4','NP1','NV1','NV2','RV43') AND sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+AND (sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'EN%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut iLIKE 'VU%')
+
+GROUP BY gta_nom_groupe_taxonomique,tax_nom_vern,tax_nom_complet,sta_nom_statut
+ORDER BY toto DESC, gta_nom_groupe_taxonomique ASC,tax_nom_complet ASC]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_nom_groupe_taxonomique</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_nom_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_nom_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_vern</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_vern</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_vern</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tax_nom_complet</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tax_nom_complet</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tax_nom_complet</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sta_nom_statut</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sta_nom_statut</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sta_nom_statut</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_arrete</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_arrete</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_arrete</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_url</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_url</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_url</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tae_article</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tae_article</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tae_article</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_max</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_max</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_max</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="echelon_sup" id="959">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">echelon_sup</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">echelon_sup</text-property>
+                    <text-property name="heading">echelon_sup</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">echelon_sup</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var sArr = params["Nom_Table"].value ; this.queryText=this.queryText.replaceAll('base_echelon', sArr); ]]></method>
+            <method name="onFetch"><![CDATA[ECHELON_SUP = dataSetRow["echelon_sup"]]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">echelon_sup</property>
+                    <property name="nativeName">echelon_sup</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select echelon_sup
+FROM birt_echelon_sup
+WHERE echelon = 'base_echelon'
+ORDER BY id_echelon DESC
+LIMIT 1;]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <page-footer>
+                <text-data id="2079">
+                    <property name="textAlign">center</property>
+                    <expression name="valueExpr">var annee = new Date().getFullYear();&#13;
+var mois = new Date().getMonth()+1;&#13;
+var jour = new Date().getDate();&#13;
+var protocol = window.location.protocol;&#13;
+&#13;
+"&lt;a href=\""+protocol+"//www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">"+protocol+"//www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\""+protocol+"//www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+                    <property name="contentType">html</property>
+                </text-data>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="965">
+            <column id="966"/>
+            <row id="967">
+                <cell id="968">
+                    <label id="975">
+                        <property name="backgroundColor">#ECECEC</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr" type="javascript">params["pdf"].value=="f"</expression>
+                            </structure>
+                        </list-property>
+                        <text-property name="text">Espèces limitrophes à enjeu</text-property>
+                    </label>
+                    <data id="969">
+                        <property name="dataSet">echelon_sup</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr" type="javascript">true</expression>
+                            </structure>
+                        </list-property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">echelon_sup</property>
+                                <text-property name="displayName">echelon_sup</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["echelon_sup"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">echelon_sup</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <table name="EBZR_ListeEspecesEchelonSup_Tab" id="876">
+            <property name="dataSet">tab</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">ECHELON_SUP == "default"</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">row_number</property>
+                    <text-property name="displayName">row_number</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["row_number"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">gta_nom_groupe_taxonomique</property>
+                    <text-property name="displayName">gta_nom_groupe_taxonomique</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["gta_nom_groupe_taxonomique"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tax_nom_vern</property>
+                    <text-property name="displayName">tax_nom_vern</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tax_nom_vern"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tax_nom_complet</property>
+                    <text-property name="displayName">tax_nom_complet</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tax_nom_complet"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">sta_nom_statut</property>
+                    <text-property name="displayName">sta_nom_statut</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sta_nom_statut"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tae_article</property>
+                    <text-property name="displayName">tae_article</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tae_article"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tae_intitule</property>
+                    <text-property name="displayName">tae_intitule</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tae_intitule"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">date_max</property>
+                    <text-property name="displayName">date_max</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date_max"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="932"/>
+            <column id="933"/>
+            <column id="934"/>
+            <column id="935"/>
+            <column id="936"/>
+            <column id="939"/>
+            <header>
+                <row id="949">
+                    <property name="backgroundColor">#ECECEC</property>
+                    <cell id="950">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="957">
+                            <property name="fontWeight">bold</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<H3>Espèces à enjeux non présentes dans la zone requêtée mais présentes à l'échelon supérieur.</H3>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="940">
+                    <property name="backgroundColor">#ECECEC</property>
+                    <cell id="941">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="883">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Groupe taxonomique</text-property>
+                        </label>
+                    </cell>
+                    <cell id="942">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="backgroundColor">#ECECEC</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="885">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Nom vernaculaire</text-property>
+                        </label>
+                    </cell>
+                    <cell id="943">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="887">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Nom scientifique</text-property>
+                        </label>
+                    </cell>
+                    <cell id="944">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="889">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Statut</text-property>
+                        </label>
+                    </cell>
+                    <cell id="945">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="948">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Réglementaire</text-property>
+                        </label>
+                    </cell>
+                    <cell id="947">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="897">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Date de dernière observation</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="877">
+                    <property name="backgroundColor">#ECECEC</property>
+                    <cell id="890">
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="893">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Intitulé(s) et article(s)</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="898">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">1</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#ECECEC</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">0</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <cell id="903">
+                        <data id="904">
+                            <property name="resultSetColumn">gta_nom_groupe_taxonomique</property>
+                        </data>
+                    </cell>
+                    <cell id="905">
+                        <data id="906">
+                            <property name="resultSetColumn">tax_nom_vern</property>
+                        </data>
+                    </cell>
+                    <cell id="907">
+                        <data id="908">
+                            <property name="resultSetColumn">tax_nom_complet</property>
+                        </data>
+                    </cell>
+                    <cell id="909">
+                        <data id="910">
+                            <property name="resultSetColumn">sta_nom_statut</property>
+                        </data>
+                    </cell>
+                    <cell id="911">
+                        <text-data id="1977">
+                            <expression name="valueExpr">row["tae_intitule"]</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
+                    </cell>
+                    <cell id="917">
+                        <data id="918">
+                            <property name="resultSetColumn">date_max</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="919">
+                    <cell id="922"/>
+                    <cell id="923"/>
+                    <cell id="924"/>
+                    <cell id="925"/>
+                    <cell id="926"/>
+                    <cell id="929"/>
+                </row>
+            </footer>
+        </table>
+        <label id="970">
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">ECHELON_SUP!="default"</expression>
+                </structure>
+            </list-property>
+            <text-property name="text">Aucun échelon supérieur sur ce zonage</text-property>
+        </label>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="ListeIdZonage">
+            <expression name="value" type="javascript">"()"</expression>
+            <property name="type">page</property>
+        </variable-element>
+    </property>
+</report>

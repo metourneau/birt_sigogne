@@ -1,0 +1,2987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[if(params["FileObs"]!="") {
+	// Périmetre personnalisé
+	reportContext.getDesignHandle().findElement("NombreObservations").setProperty("dataSet", "EBZR_ListeEspacesMaille_NbObsPerso");
+	reportContext.getDesignHandle().findElement("NombreEspeces").setProperty("dataSet", "EBZR_ListeEspacesMaille_NbEspecePerso");
+	importPackage(java.io);
+	br = new BufferedReader(new FileReader("./webapps/birt/report/listeobs/" + params["FileObs"] + ".wkt"));
+	geomObs = br.readLine();
+	reportContext.setPageVariable("GeomObs", geomObs);
+	br.close();
+}
+
+if(params["FileZonage"]!="") {
+	importPackage(java.io);
+	br = new BufferedReader(new FileReader("./webapps/birt/report/listezonage/" + params["FileZonage"]));
+	idZonage = br.readLine();
+	reportContext.setPageVariable("ListeIdZonage", idZonage);
+	br.close();
+}
+]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="ID_Zonage" id="211">
+            <property name="hidden">false</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <expression name="sortByColumn">dataSetRow["gez_id_geom_zonage"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">1500000127</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Nom_Table" id="2071">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">tv_taxon_observe_commune</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Tbl_Echelon" id="2072">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="FileObs" id="2075">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pdf" id="2076">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">f</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="FileZonage" id="2117">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Sigogne3" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeEspacesMaille_NbEspece" id="1050">
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[var sArr = params["Nom_Table"].value.split("_") ; this.queryText=this.queryText.replaceAll('param_table_geom', 'tv_geom_zonages_'+sArr[3]);
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet"/>
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon)) as count,gta_nom_groupe_taxonomique,dd.seuil1_connaissance,seuil2_connaissance
+,( CASE WHEN count(distinct(a.tao_id_taxon)) < seuil1_connaissance THEN '1' 
+WHEN count(distinct(a.tao_id_taxon)) >= seuil1_connaissance AND count(distinct(a.tao_id_taxon)) <= seuil2_connaissance  THEN '2'
+ELSE ( '3' ) END ) AS niveau_connaissance
+	
+,(CASE WHEN  b.gta_id_groupe_taxonomique = 1 THEN 1
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 1 THEN 2
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 2 THEN 3
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 3 THEN 4
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 7 THEN 5
+WHEN b.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 4 THEN 9
+WHEN b.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 5 THEN 10
+END ) AS ordre
+
+ 
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique 
+JOIN tv_taxon_observe_maille10 c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN module.tr_sous_groupe_seuils_connaissance dd ON a.sgt_code_ss_groupe_taxonomique = dd.sgt_code_ss_groupe_taxonomique
+
+
+WHERE gez_id_geom_zonage IN
+(
+	SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a, param_table_geom
+	WHERE st_intersects(a.the_geom,centroid(param_table_geom.gez_geometry))
+	AND param_table_geom.gez_id_geom_zonage in ListeIdZonage
+)
+
+
+GROUP BY gta_nom_groupe_taxonomique,seuil1_connaissance,seuil2_connaissance,b.gta_id_groupe_taxonomique,a.sgt_code_ss_groupe_taxonomique
+
+UNION
+SELECT count(distinct(a.tao_id_taxon)) as count,gta_nom_groupe_taxonomique,dd.seuil1_connaissance,seuil2_connaissance
+,( CASE WHEN count(distinct(a.tao_id_taxon)) < seuil1_connaissance THEN '1' 
+WHEN count(distinct(a.tao_id_taxon)) >= seuil1_connaissance AND count(distinct(a.tao_id_taxon)) <= seuil2_connaissance  THEN '2'
+ELSE ( '3' ) END ) AS niveau_connaissance
+	
+,(CASE WHEN  b.gta_id_groupe_taxonomique = 4 THEN 6
+WHEN b.gta_id_groupe_taxonomique = 5 THEN 7
+WHEN b.gta_id_groupe_taxonomique = 6 THEN 8
+
+END ) AS ordre
+
+ 
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique 
+JOIN tv_taxon_observe_maille10 c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN module.tr_sous_groupe_seuils_connaissance dd ON a.gta_id_groupe_taxonomique = dd.gta_id_groupe_taxonomique
+
+
+WHERE gez_id_geom_zonage IN
+(
+	SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a, param_table_geom
+	WHERE st_intersects(a.the_geom,centroid(param_table_geom.gez_geometry))
+	AND param_table_geom.gez_id_geom_zonage in ListeIdZonage
+)
+AND dd.sgt_code_ss_groupe_taxonomique is null
+AND a.gta_id_groupe_taxonomique != 3 -- pas les poissons
+
+GROUP BY gta_nom_groupe_taxonomique,seuil1_connaissance,seuil2_connaissance,b.gta_id_groupe_taxonomique
+
+ORDER BY ordre
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>count</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_nom_groupe_taxonomique</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_nom_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_nom_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sgt_nom_sous_groupe_taxonomique</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sgt_nom_sous_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sgt_nom_sous_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_id_groupe_taxonomique</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_id_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_id_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sgt_code_ss_groupe_taxonomique</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sgt_code_ss_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sgt_code_ss_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>seuil1_connaissance</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>seuil1_connaissance</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>seuil1_connaissance</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>seuil2_connaissance</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>seuil2_connaissance</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>seuil2_connaissance</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeEspacesMaille_NbEspecePerso" id="2073">
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('WKTArea', reportContext.getPageVariable("GeomObs"));]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon)) as count,gta_nom_groupe_taxonomique,dd.seuil1_connaissance,seuil2_connaissance
+,( CASE WHEN count(distinct(a.tao_id_taxon)) < seuil1_connaissance THEN '1' 
+WHEN count(distinct(a.tao_id_taxon)) >= seuil1_connaissance AND count(distinct(a.tao_id_taxon)) <= seuil2_connaissance  THEN '2'
+ELSE ( '3' ) END ) AS niveau_connaissance
+	
+,(CASE WHEN  b.gta_id_groupe_taxonomique = 1 THEN 1
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 1 THEN 2
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 2 THEN 3
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 3 THEN 4
+WHEN b.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 7 THEN 5
+WHEN b.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 4 THEN 9
+WHEN b.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 5 THEN 10
+END ) AS ordre
+
+ 
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique 
+JOIN tv_taxon_observe_maille10 c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN module.tr_sous_groupe_seuils_connaissance dd ON a.sgt_code_ss_groupe_taxonomique = dd.sgt_code_ss_groupe_taxonomique
+
+
+WHERE gez_id_geom_zonage IN
+(
+	SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+)
+
+
+GROUP BY gta_nom_groupe_taxonomique,seuil1_connaissance,seuil2_connaissance,b.gta_id_groupe_taxonomique,a.sgt_code_ss_groupe_taxonomique
+
+UNION
+SELECT count(distinct(a.tao_id_taxon)) as count,gta_nom_groupe_taxonomique,dd.seuil1_connaissance,seuil2_connaissance
+,( CASE WHEN count(distinct(a.tao_id_taxon)) < seuil1_connaissance THEN '1' 
+WHEN count(distinct(a.tao_id_taxon)) >= seuil1_connaissance AND count(distinct(a.tao_id_taxon)) <= seuil2_connaissance  THEN '2'
+ELSE ( '3' ) END ) AS niveau_connaissance
+	
+,(CASE WHEN  b.gta_id_groupe_taxonomique = 4 THEN 6
+WHEN b.gta_id_groupe_taxonomique = 5 THEN 7
+WHEN b.gta_id_groupe_taxonomique = 6 THEN 8
+
+END ) AS ordre
+
+ 
+FROM t_taxon_observe a
+JOIN tr_groupe_taxonomique b ON a.gta_id_groupe_taxonomique = b.gta_id_groupe_taxonomique 
+JOIN tv_taxon_observe_maille10 c ON a.tao_id_taxon = c.tao_id_taxon
+JOIN module.tr_sous_groupe_seuils_connaissance dd ON a.gta_id_groupe_taxonomique = dd.gta_id_groupe_taxonomique
+
+
+WHERE gez_id_geom_zonage IN
+(
+	SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+)
+AND dd.sgt_code_ss_groupe_taxonomique is null
+AND a.gta_id_groupe_taxonomique != 3 -- pas les poissons
+
+GROUP BY gta_nom_groupe_taxonomique,seuil1_connaissance,seuil2_connaissance,b.gta_id_groupe_taxonomique
+
+ORDER BY ordre]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>count</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_nom_groupe_taxonomique</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_nom_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_nom_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sgt_nom_sous_groupe_taxonomique</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sgt_nom_sous_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sgt_nom_sous_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gta_id_groupe_taxonomique</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gta_id_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gta_id_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sgt_code_ss_groupe_taxonomique</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sgt_code_ss_groupe_taxonomique</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sgt_code_ss_groupe_taxonomique</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>seuil1_connaissance</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>seuil1_connaissance</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>seuil1_connaissance</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>seuil2_connaissance</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>seuil2_connaissance</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>seuil2_connaissance</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeEspacesMaille_NbObs" id="1914">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_4</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_5</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_6</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_7</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_8</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_9</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">9</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_10</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">10</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[var sArr = params["Nom_Table"].value.split("_") ; this.queryText=this.queryText.replaceAll('param_table_geom', 'tv_geom_zonages_'+sArr[3]);
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet"/>
+            <xml-property name="queryText"><![CDATA[(SELECT ntile,nb_obs FROM --flore
+(
+	SELECT nb_obs, ntile(4) OVER() FROM 
+	(
+		SELECT 
+		count(*) as nb_obs
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE a.gta_id_groupe_taxonomique = 1
+		GROUP BY gez_id_geom_zonage
+	) f 
+) c
+WHERE c.nb_obs = 
+(
+	SELECT count(*)	
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(
+		SELECT a.gez_id_geom_zonage
+		FROM tv_geom_zonages_maille10 a, param_table_geom b
+		WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+		AND b.gez_id_geom_zonage in ListeIdZonage
+	)
+	AND a.gta_id_groupe_taxonomique = 1
+	
+)LIMIT 1)
+
+
+UNION ALL --rhopalo
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 1
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 1
+)LIMIT 1)
+
+UNION ALL --orthoptere
+
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 2
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 2
+)LIMIT 1)
+
+UNION ALL --odonate
+
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 3
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 3
+)LIMIT 1)
+
+UNION ALL -- autre insectes
+
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 7
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 2 AND a.sgt_code_ss_groupe_taxonomique = 7
+)LIMIT 1)
+
+UNION ALL --oiseau
+(SELECT ntile,nb_obs FROM 
+(
+	SELECT nb_obs, ntile(4) OVER() FROM 
+	(
+		SELECT 
+		count(*) as nb_obs
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE a.gta_id_groupe_taxonomique = 4
+		GROUP BY gez_id_geom_zonage
+	) f 
+) c
+WHERE c.nb_obs = 
+(
+	SELECT count(*)	
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(
+		SELECT a.gez_id_geom_zonage
+		FROM tv_geom_zonages_maille10 a, param_table_geom b
+		WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+		AND b.gez_id_geom_zonage in ListeIdZonage
+	)
+	AND a.gta_id_groupe_taxonomique = 4
+)LIMIT 1)
+
+UNION ALL
+
+(SELECT ntile,nb_obs FROM 
+(
+	SELECT nb_obs, ntile(4) OVER() FROM 
+	(
+		SELECT 
+		count(*) as nb_obs
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE a.gta_id_groupe_taxonomique = 5
+		GROUP BY gez_id_geom_zonage
+	) f 
+) c
+WHERE c.nb_obs = 
+(
+	SELECT count(*)	
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(
+		SELECT a.gez_id_geom_zonage
+		FROM tv_geom_zonages_maille10 a, param_table_geom b
+		WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+		AND b.gez_id_geom_zonage in ListeIdZonage
+	)
+	AND a.gta_id_groupe_taxonomique = 5
+)LIMIT 1)
+
+UNION ALL
+
+(SELECT ntile,nb_obs FROM 
+(
+	SELECT nb_obs, ntile(4) OVER() FROM 
+	(
+		SELECT 
+		count(*) as nb_obs
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE a.gta_id_groupe_taxonomique = 6
+		GROUP BY gez_id_geom_zonage
+	) f 
+) c
+WHERE c.nb_obs = 
+(
+	SELECT count(*)	
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(
+		SELECT a.gez_id_geom_zonage
+		FROM tv_geom_zonages_maille10 a, param_table_geom b
+		WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+		AND b.gez_id_geom_zonage in ListeIdZonage
+	)
+	AND a.gta_id_groupe_taxonomique = 6
+)LIMIT 1)
+
+UNION ALL --chiro
+
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 4
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 4
+)LIMIT 1)
+
+UNION ALL --autre mamm
+
+(SELECT ntile,nb_obs FROM (
+
+SELECT nb_obs, ntile(4) OVER() FROM (
+
+SELECT 
+count(*) as nb_obs
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+WHERE d.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 5
+
+
+GROUP BY gez_id_geom_zonage,c.gta_id_groupe_taxonomique,d.sgt_code_ss_groupe_taxonomique
+ ) f ) c
+WHERE c.nb_obs = (SELECT count(*)
+	
+FROM t_taxon_observe a
+JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+LEFT JOIN tr_sous_groupe_taxonomique d on a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+
+WHERE gez_id_geom_zonage IN(
+SELECT a.gez_id_geom_zonage
+FROM tv_geom_zonages_maille10 a, param_table_geom b
+WHERE st_intersects(a.the_geom,centroid(b.gez_geometry))
+AND b.gez_id_geom_zonage in ListeIdZonage)
+
+AND d.gta_id_groupe_taxonomique = 7 AND a.sgt_code_ss_groupe_taxonomique = 5
+)LIMIT 1)
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>?column?</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>17</design:precision>
+            <design:scale>17</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>?column?</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>?column?</design:label>
+            <design:formattingHints>
+              <design:displaySize>24</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeEspacesMaille_NbObsPerso" id="2074">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData"/>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('WKTArea', reportContext.getPageVariable("GeomObs")); ]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <xml-property name="queryText"><![CDATA[(
+	-- Flore
+	SELECT ntile, nb_obs
+	FROM (
+		SELECT nb_obs, ntile(4) OVER()
+		FROM (
+			SELECT count(*) AS nb_obs
+			FROM t_taxon_observe a
+			JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+			JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+			LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+			WHERE a.gta_id_groupe_taxonomique = 1
+			GROUP BY gez_id_geom_zonage
+		) f
+	) c
+	WHERE c.nb_obs = (
+		SELECT count(*)
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE gez_id_geom_zonage IN	(
+			SELECT a.gez_id_geom_zonage
+			FROM tv_geom_zonages_maille10 a
+			WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+		)
+		AND a.gta_id_groupe_taxonomique = 1
+	) LIMIT 1
+)
+UNION ALL
+(
+	-- Rhopalo
+	SELECT ntile, nb_obs
+	FROM (
+		SELECT nb_obs, ntile(4) OVER()
+		FROM (
+			SELECT count(*) AS nb_obs
+			FROM t_taxon_observe a
+			JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+			JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+			LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+			WHERE d.gta_id_groupe_taxonomique = 2
+			AND a.sgt_code_ss_groupe_taxonomique = 1
+			GROUP BY gez_id_geom_zonage, c.gta_id_groupe_taxonomique, d.sgt_code_ss_groupe_taxonomique
+		) f
+	) c
+	WHERE c.nb_obs = (
+		SELECT count(*)
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE gez_id_geom_zonage IN (
+			SELECT a.gez_id_geom_zonage
+			FROM tv_geom_zonages_maille10 a
+			WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+		)
+		AND d.gta_id_groupe_taxonomique = 2
+		AND a.sgt_code_ss_groupe_taxonomique = 1 )
+	LIMIT 1
+)
+UNION ALL --orthoptere
+(
+	SELECT ntile, nb_obs
+	FROM (
+		SELECT nb_obs, ntile(4) OVER()
+		FROM (
+			SELECT count(*) AS nb_obs
+			FROM t_taxon_observe a
+			JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+			JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+			LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+			WHERE d.gta_id_groupe_taxonomique = 2
+			AND a.sgt_code_ss_groupe_taxonomique = 2
+			GROUP BY gez_id_geom_zonage, c.gta_id_groupe_taxonomique, d.sgt_code_ss_groupe_taxonomique
+		) f
+	) c
+	WHERE c.nb_obs = (
+		SELECT count(*)
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE gez_id_geom_zonage IN (
+			SELECT a.gez_id_geom_zonage
+			FROM tv_geom_zonages_maille10 a
+			WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+		)
+		AND d.gta_id_groupe_taxonomique = 2
+		AND a.sgt_code_ss_groupe_taxonomique = 2
+	)
+	LIMIT 1
+)
+UNION ALL --odonate
+
+(
+	SELECT ntile, nb_obs
+	FROM (
+		SELECT nb_obs, ntile(4) OVER()
+		FROM (
+			SELECT count(*) AS nb_obs
+			FROM t_taxon_observe a
+			JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+			JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+			LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+			WHERE d.gta_id_groupe_taxonomique = 2
+			AND a.sgt_code_ss_groupe_taxonomique = 3
+			GROUP BY gez_id_geom_zonage, c.gta_id_groupe_taxonomique, d.sgt_code_ss_groupe_taxonomique
+		) f
+	) c
+	WHERE c.nb_obs = (
+		SELECT count(*)
+		FROM t_taxon_observe a
+		JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+		JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+		LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+		WHERE gez_id_geom_zonage IN (
+			SELECT a.gez_id_geom_zonage
+			FROM tv_geom_zonages_maille10 a
+			WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+		)
+		AND d.gta_id_groupe_taxonomique = 2
+		AND a.sgt_code_ss_groupe_taxonomique = 3
+	)
+	LIMIT 1
+)
+UNION ALL -- autre insectes
+
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE d.gta_id_groupe_taxonomique = 2
+	AND a.sgt_code_ss_groupe_taxonomique = 7
+	GROUP BY gez_id_geom_zonage,
+		c.gta_id_groupe_taxonomique,
+		d.sgt_code_ss_groupe_taxonomique ) f) c
+WHERE c.nb_obs =
+(SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))))
+	AND d.gta_id_groupe_taxonomique = 2
+	AND a.sgt_code_ss_groupe_taxonomique = 7 ) LIMIT 1)
+UNION ALL --oiseau
+
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE a.gta_id_groupe_taxonomique = 4
+	GROUP BY gez_id_geom_zonage ) f) c
+WHERE c.nb_obs =
+( SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	( SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154)))
+	)
+	AND a.gta_id_groupe_taxonomique = 4 ) LIMIT 1)
+UNION ALL
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE a.gta_id_groupe_taxonomique = 5
+	GROUP BY gez_id_geom_zonage ) f) c
+WHERE c.nb_obs =
+( SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	( SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))) )
+	AND a.gta_id_groupe_taxonomique = 5 ) LIMIT 1)
+UNION ALL
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE a.gta_id_groupe_taxonomique = 6
+	GROUP BY gez_id_geom_zonage ) f) c
+WHERE c.nb_obs =
+( SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	( SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))) )
+	AND a.gta_id_groupe_taxonomique = 6 ) LIMIT 1)
+UNION ALL --chiro
+
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE d.gta_id_groupe_taxonomique = 7
+	AND a.sgt_code_ss_groupe_taxonomique = 4
+	GROUP BY gez_id_geom_zonage,
+		c.gta_id_groupe_taxonomique,
+		d.sgt_code_ss_groupe_taxonomique ) f) c
+WHERE c.nb_obs =
+(SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	(SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))))
+	AND d.gta_id_groupe_taxonomique = 7
+	AND a.sgt_code_ss_groupe_taxonomique = 4 ) LIMIT 1)
+UNION ALL --autre mamm
+
+(SELECT ntile,
+	nb_obs
+FROM
+( SELECT nb_obs,
+	ntile(4) OVER()
+FROM
+	( SELECT count(*) AS nb_obs
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE d.gta_id_groupe_taxonomique = 7
+	AND a.sgt_code_ss_groupe_taxonomique = 5
+	GROUP BY gez_id_geom_zonage,
+		c.gta_id_groupe_taxonomique,
+		d.sgt_code_ss_groupe_taxonomique ) f) c
+WHERE c.nb_obs =
+(SELECT count(*)
+	FROM t_taxon_observe a
+	JOIN tv_taxon_observe_maille10 b ON a.tao_id_taxon = b.tao_id_taxon
+	JOIN tr_groupe_taxonomique c ON a.gta_id_groupe_taxonomique = c.gta_id_groupe_taxonomique
+	LEFT JOIN tr_sous_groupe_taxonomique d ON a.sgt_code_ss_groupe_taxonomique = d.sgt_code_ss_groupe_taxonomique
+	WHERE gez_id_geom_zonage IN
+	( SELECT a.gez_id_geom_zonage
+	FROM tv_geom_zonages_maille10 a
+	WHERE st_intersects(a.the_geom,centroid(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))))
+	AND d.gta_id_groupe_taxonomique = 7
+	AND a.sgt_code_ss_groupe_taxonomique = 5 ) LIMIT 1)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>?column?</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>17</design:precision>
+            <design:scale>17</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>?column?</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>?column?</design:label>
+            <design:formattingHints>
+              <design:displaySize>24</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text-data id="2079">
+                    <property name="textAlign">center</property>
+                    <expression name="valueExpr">var annee = new Date().getFullYear();&#13;
+var mois = new Date().getMonth()+1;&#13;
+var jour = new Date().getDate();&#13;
+var protocol = window.location.protocol;&#13;
+&#13;
+"&lt;a href=\""+protocol+"//www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">"+protocol+"//www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\""+protocol+"//www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+                    <property name="contentType">html</property>
+                </text-data>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="975">
+            <property name="backgroundColor">#ECECEC</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">params["pdf"].value=="f"</expression>
+                </structure>
+            </list-property>
+            <text-property name="text">Données de la maille 10*10 km</text-property>
+        </label>
+        <grid name="2 - Menace" id="27">
+            <property name="marginTop">1%</property>
+            <property name="marginLeft">1%</property>
+            <property name="marginBottom">1%</property>
+            <property name="marginRight">1%</property>
+            <property name="height">98%</property>
+            <property name="width">98%</property>
+            <column id="29">
+                <property name="width">4.375in</property>
+            </column>
+            <row id="30">
+                <property name="height">4.041666666666667in</property>
+                <cell id="32">
+                    <property name="width">60%</property>
+                    <grid id="224">
+                        <column id="1891">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="225"/>
+                        <column id="283"/>
+                        <column id="226"/>
+                        <column id="297">
+                            <property name="width">15%</property>
+                        </column>
+                        <column id="227">
+                            <property name="width">15%</property>
+                        </column>
+                        <column id="1904">
+                            <property name="width">10%</property>
+                        </column>
+                        <row id="1043">
+                            <cell id="1879">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1044">
+                                <property name="colSpan">5</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1049">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<H3>Données de la maille 10*10 km, maille centrale</H3>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1892">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="228">
+                            <cell id="1880">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="229">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="264">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Groupe d'espèce]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="288">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="265">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Nombre d'espèces de la maille 10*10 km]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="231">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="266">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Nombre d'observations de la maille 10*10 km ]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1893">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="232">
+                            <cell id="1881">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="233">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="267">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Flore]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="275">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1865">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Plantes terrestres]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="289">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">10</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="paddingTop">0pt</property>
+                                <property name="paddingLeft">0pt</property>
+                                <property name="paddingBottom">0pt</property>
+                                <property name="paddingRight">0pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <table name="NombreEspeces" id="2015">
+                                    <property name="dataSet">EBZR_ListeEspacesMaille_NbEspece</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">count</property>
+                                            <text-property name="displayName">count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">gta_nom_groupe_taxonomique</property>
+                                            <text-property name="displayName">gta_nom_groupe_taxonomique</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["gta_nom_groupe_taxonomique"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">seuil1_connaissance</property>
+                                            <text-property name="displayName">seuil1_connaissance</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["seuil1_connaissance"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">seuil2_connaissance</property>
+                                            <text-property name="displayName">seuil2_connaissance</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["seuil2_connaissance"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">niveau_connaissance</property>
+                                            <text-property name="displayName">niveau_connaissance</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["niveau_connaissance"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">ordre</property>
+                                            <text-property name="displayName">ordre</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["ordre"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <column id="2049"/>
+                                    <detail>
+                                        <row id="2029">
+                                            <cell id="2030">
+                                                <data id="2031">
+                                                    <property name="marginTop">1pt</property>
+                                                    <property name="marginBottom">1pt</property>
+                                                    <property name="numberAlign">center</property>
+                                                    <list-property name="highlightRules">
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#E5E5E5</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["niveau_connaissance"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">1</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#999999</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["niveau_connaissance"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">2</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#727272</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["niveau_connaissance"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">3</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">count</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </detail>
+                                </table>
+                            </cell>
+                            <cell id="235">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">10</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="paddingTop">0pt</property>
+                                <property name="paddingLeft">0pt</property>
+                                <property name="paddingBottom">0pt</property>
+                                <property name="paddingRight">0pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <table name="NombreObservations" id="2055">
+                                    <property name="dataSet">EBZR_ListeEspacesMaille_NbObs</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">ntile</property>
+                                            <text-property name="displayName">ntile</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["ntile"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">nb_obs</property>
+                                            <text-property name="displayName">nb_obs</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["nb_obs"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                    </list-property>
+                                    <column id="2070"/>
+                                    <detail>
+                                        <row id="2061">
+                                            <cell id="2064">
+                                                <data id="2065">
+                                                    <property name="marginTop">1pt</property>
+                                                    <property name="marginBottom">1pt</property>
+                                                    <property name="textAlign">center</property>
+                                                    <list-property name="highlightRules">
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#F8F5CB</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["ntile"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">1</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#F3E281</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["ntile"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">2</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#BCA75F</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["ntile"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">3</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <property name="backgroundColor">#744B1F</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="color">#000000</property>
+                                                            <expression name="testExpr" type="javascript">row["ntile"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value type="javascript">4</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">nb_obs</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </detail>
+                                </table>
+                            </cell>
+                            <cell id="1894">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="1748">
+                            <cell id="1882">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1749">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">4</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1772">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Invertebrés]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1750">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1773">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Rhopalocères]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1895">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="1754">
+                            <cell id="1883">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1756">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1777">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Orthoptères]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1896">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="1760">
+                            <cell id="1884">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1762">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1781">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Odonates]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1897">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="1766">
+                            <cell id="1885">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1768">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1782">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Autres invertébrés]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1898">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="248">
+                            <cell id="1886">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="249">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">5</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="287">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Vertebrés]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="279">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1786">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Oiseaux]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1899">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="252">
+                            <cell id="1887">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="280">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="273">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Amphibiens]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1900">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="1629">
+                            <cell id="1888">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="1631">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="1635">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Reptiles]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1901">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="256">
+                            <cell id="1889">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="281">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="284">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Mammifères]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="258">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="285">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Chiroptères]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1902">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                        <row id="260">
+                            <cell id="1890">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                            <cell id="262">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="286">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Autres mammifères]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1903">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="1954">
+            <column id="1955">
+                <property name="width">20%</property>
+            </column>
+            <column id="1956"/>
+            <column id="1957">
+                <property name="width">15%</property>
+            </column>
+            <column id="1958"/>
+            <column id="1959">
+                <property name="width">15%</property>
+            </column>
+            <column id="2009">
+                <property name="width">20%</property>
+            </column>
+            <row id="1960">
+                <cell id="1961"/>
+                <cell id="1962">
+                    <property name="colSpan">4</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1801">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Légende]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2002"/>
+            </row>
+            <row id="1966">
+                <cell id="1967"/>
+                <cell id="1968">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1809">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Nombre d'espèces de maille 10*10 km *]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1970">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1810">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Nombre d'observations de la maille 10*10 km *]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2003"/>
+            </row>
+            <row id="1972">
+                <cell id="1973"/>
+                <cell id="1974">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1828">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[1<SUP>er</SUP> tier des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1975">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#E5E5E5</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="1976">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1837">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[1<SUP>er</SUP> quart des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1977">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#F8F5CB</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="2004"/>
+            </row>
+            <row id="1978">
+                <cell id="1979"/>
+                <cell id="1980">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1829">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[2<SUP>ème</SUP> tier des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1981">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#999999</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="1982">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1839">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[2<SUP>ème</SUP> quart des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1983">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#F3E281</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="2005"/>
+            </row>
+            <row id="1984">
+                <cell id="1985"/>
+                <cell id="1986">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1830">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[3<SUP>ème</SUP> tier des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1987">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#727272</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="1988">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1841">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[3<SUP>ème</SUP> quart des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1989">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#BCA75F</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2006"/>
+            </row>
+            <row id="1990">
+                <cell id="1991"/>
+                <cell id="1992">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                </cell>
+                <cell id="1993">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                </cell>
+                <cell id="1994">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="1858">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">3pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[4<SUP>ème</SUP> quart des mailles]]></text-property>
+                    </text>
+                </cell>
+                <cell id="1995">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundColor">#744B1F</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <property name="width">15%</property>
+                </cell>
+                <cell id="2007"/>
+            </row>
+            <row id="1996">
+                <cell id="1997"/>
+                <cell id="1998">
+                    <property name="colSpan">4</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="2013">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[* La maille 10*10 km retenue est celle contenant le centroide de l'objet interrogé]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2008"/>
+            </row>
+        </grid>
+        <grid id="1946">
+            <column id="1947"/>
+            <row id="1948">
+                <cell id="1949">
+                    <property name="paddingTop">20pt</property>
+                    <property name="textAlign">center</property>
+                    <image id="1953">
+                        <property name="height">873px</property>
+                        <property name="width">873px</property>
+                        <property name="source">file</property>
+                        <expression name="uri" type="constant">images/birt_legende_esp_ob_maille_10.jpg</expression>
+                    </image>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <property name="pageVariables">
+        <variable-element name="ListeIdObs">
+            <expression name="value" type="javascript">"()"</expression>
+            <property name="type">page</property>
+        </variable-element>
+        <variable-element name="GeomObs">
+            <expression name="value" type="javascript">"()"</expression>
+            <property name="type">page</property>
+        </variable-element>
+        <variable-element name="ListeIdZonage">
+            <expression name="value" type="javascript">"()"</expression>
+            <property name="type">page</property>
+        </variable-element>
+    </property>
+</report>
