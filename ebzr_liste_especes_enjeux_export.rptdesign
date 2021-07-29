@@ -143,7 +143,7 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
@@ -853,7 +853,7 @@ WHEN ty.tlo_nom_type_localisation = 'Linéaire' THEN 'Trés précis'
 WHEN ty.tlo_nom_type_localisation = 'Lieu-dit' THEN 'Trés précis' 
 WHEN ty.tlo_nom_type_localisation = 'Grilles 10*10' THEN 'Pas précis (grilles 5 ou 10 km)' 
 WHEN ty.tlo_nom_type_localisation = 'Grilles 5*5' THEN 'Pas précis (grilles 5 ou 10 km)' 
-WHEN ty.tlo_nom_type_localisation = 'Grilles 3*3' THEN 'Trés précis' 
+WHEN ty.tlo_nom_type_localisation = 'Grilles 3*3' THEN 'Très précis' 
 ELSE ( 'données de précision faible' ) END ) AS precision,
 
 (CASE 
@@ -1242,18 +1242,18 @@ FROM (
             WHEN sta_nom_statut LIKE 'LC%' THEN '2'
             ELSE ( '1' ) END  DESC, gta_nom_groupe_taxonomique ASC, tax_nom_complet ASC),
 			           CASE
-		WHEN sta_nom_statut is not null THEN true
+		WHEN i.edi_id_entite_diffusion is not null THEN true
 		END AS restriction,
-		array_to_string(array_agg(distinct(j.edi_nom_entite_diffusion ) ), ', ') as edi_nom_entite_diffusion,
+	array_to_string(array_agg(distinct(j.edi_nom_entite_diffusion ) ), ', ') as edi_nom_entite_diffusion,
       gta_nom_groupe_taxonomique,
       tax_nom_vern,
       tax_nom_complet,
       sta_nom_statut,
-      array_to_string(array_agg(distinct('<a href="' || tae_url || '" TARGET="_blank">' || tae_intitule || '</a> (' || tae_article || ')')), ', ') as tae_intitule,
+      array_to_string(array_agg(distinct(tae_intitule || tae_article || ')' ) ), ', ') as tae_intitule,
       array_to_string(array_agg(distinct(tae_article)),' - ') as tae_article,
       MAX(SUBSTRING(ota_date_debut FOR 4)) as date_max,
       array_to_string(array_agg(distinct(str_nom_structure)),' - ') as nom_structure,
-      MAX( CASE WHEN code_atlas !='' THEN 'oui' END) AS nicheur,
+      MAX( CASE WHEN code_atlas !='' AND gta_nom_groupe_taxonomique ='Oiseau' THEN 'oui' END) AS nicheur,
       MAX(tao_fiche_espece) AS tao_fiche_espece,
       MAX(
 		CASE				  
@@ -1386,7 +1386,7 @@ AND (sta_nom_statut LIKE 'RE%' OR sta_nom_statut LIKE 'CR%' OR sta_nom_statut LI
 
 AND (a.tao_id_taxon NOT IN (SELECT tao_id_taxon FROM base_table WHERE gez_id_geom_zonage = ?)))
 
-GROUP BY gta_nom_groupe_taxonomique,tax_nom_vern,tax_nom_complet,e.sta_nom_statut
+GROUP BY gta_nom_groupe_taxonomique,tax_nom_vern,tax_nom_complet,e.sta_nom_statut,i.edi_id_entite_diffusion,j.edi_nom_entite_diffusion
 ORDER BY toto DESC, gta_nom_groupe_taxonomique ASC, tax_nom_complet ASC
 
 ) t
@@ -1793,7 +1793,7 @@ var jour = new Date().getDate();&#13;
                     <property name="backgroundColor">#ECECEC</property>
                     <cell id="828">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1813,7 +1813,7 @@ var jour = new Date().getDate();&#13;
                     </cell>
                     <cell id="829">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1834,7 +1834,7 @@ var jour = new Date().getDate();&#13;
                     </cell>
                     <cell id="830">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1855,7 +1855,7 @@ var jour = new Date().getDate();&#13;
                     </cell>
                     <cell id="831">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1892,13 +1892,12 @@ var jour = new Date().getDate();&#13;
                         <property name="verticalAlign">middle</property>
                         <label id="835">
                             <property name="fontWeight">bold</property>
-                            <text-property name="text">Réglementaire&#13;
-Intitulé(s) et article(s)</text-property>
+                            <text-property name="text">Réglementaire</text-property>
                         </label>
                     </cell>
                     <cell id="834">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1919,7 +1918,7 @@ Intitulé(s) et article(s)</text-property>
                     </cell>
                     <cell id="859">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1935,12 +1934,12 @@ Intitulé(s) et article(s)</text-property>
                         <property name="verticalAlign">middle</property>
                         <label id="865">
                             <property name="fontWeight">bold</property>
-                            <text-property name="text">Chef de file</text-property>
+                            <text-property name="text">Animateur</text-property>
                         </label>
                     </cell>
                     <cell id="868">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1961,7 +1960,7 @@ Intitulé(s) et article(s)</text-property>
                     </cell>
                     <cell id="1980">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -1982,7 +1981,7 @@ Intitulé(s) et article(s)</text-property>
                     </cell>
                     <cell id="2130">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2003,7 +2002,7 @@ Intitulé(s) et article(s)</text-property>
                     </cell>
                     <cell id="1989">
                         <property name="colSpan">1</property>
-                        <property name="rowSpan">1</property>
+                        <property name="rowSpan">2</property>
                         <property name="borderBottomColor">#FFFFFF</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">thin</property>
@@ -2023,8 +2022,63 @@ Intitulé(s) et article(s)</text-property>
                         </label>
                     </cell>
                 </row>
+                <row id="770">
+                    <property name="backgroundColor">#ECECEC</property>
+                    <cell id="781">
+                        <property name="borderBottomColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#FFFFFF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#FFFFFF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#FFFFFF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="839">
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Intitulé(s) et article(s)</text-property>
+                        </label>
+                    </cell>
+                </row>
             </header>
             <detail>
+                <row id="851">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">1</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#EBECED</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">0</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <cell id="852"/>
+                    <cell id="853"/>
+                    <cell id="854"/>
+                    <cell id="855"/>
+                    <cell id="856"/>
+                    <cell id="858"/>
+                    <cell id="861"/>
+                    <cell id="870"/>
+                    <cell id="1982"/>
+                    <cell id="2132"/>
+                    <cell id="1991"/>
+                </row>
                 <row id="789">
                     <property name="pageBreakInside">auto</property>
                     <list-property name="highlightRules">
@@ -2344,6 +2398,21 @@ Intitulé(s) et article(s)</text-property>
                     </cell>
                 </row>
             </detail>
+            <footer>
+                <row id="808">
+                    <cell id="810"/>
+                    <cell id="811"/>
+                    <cell id="812"/>
+                    <cell id="813"/>
+                    <cell id="814"/>
+                    <cell id="817"/>
+                    <cell id="863"/>
+                    <cell id="872"/>
+                    <cell id="1984"/>
+                    <cell id="2134"/>
+                    <cell id="1993"/>
+                </row>
+            </footer>
         </table>
     </body>
     <property name="pageVariables">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <property name="units">in</property>
     <method name="initialize"><![CDATA[if(params["FileObs"]!="") {
 	// Périmetre personnalisé
@@ -41,7 +41,7 @@ if(params["Tbl_Echelon"]!="") {
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">455</value>
+                <value type="constant">1500000127</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -140,243 +140,233 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeZonagesEnvironnementaux" id="2249">
-            <list-property name="columnHints">
+            <list-property name="columnHints"/>
+            <list-property name="parameters">
                 <structure>
-                    <property name="columnName">ordre</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">ordre</text-property>
-                    <text-property name="heading">ordre</text-property>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Type de zonage</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">Type de zonage</text-property>
-                    <text-property name="heading">Type de zonage</text-property>
+                    <property name="name">param_2</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">nom_site</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">nom_site</text-property>
-                    <text-property name="heading">nom_site</text-property>
+                    <property name="name">param_3</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Surface totale origine (ha)</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">Surface totale origine (ha)</text-property>
-                    <text-property name="heading">Surface totale origine (ha)</text-property>
+                    <property name="name">param_4</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Surface intersectée (ha)</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">Surface intersectée (ha)</text-property>
-                    <text-property name="heading">Surface intersectée (ha)</text-property>
+                    <property name="name">param_5</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">url_fiche</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">url_fiche</text-property>
-                    <text-property name="heading">url_fiche</text-property>
+                    <property name="name">param_6</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Lien fiche</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">Lien fiche</text-property>
-                    <text-property name="heading">Lien fiche</text-property>
+                    <property name="name">param_7</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">row_number</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">row_number</text-property>
-                    <text-property name="heading">row_number</text-property>
+                    <property name="name">param_8</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_9</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">9</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_10</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">10</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_11</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">11</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_12</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">12</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">ordre</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">Type de zonage</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">nom_site</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">Surface totale origine (ha)</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">Surface intersectée (ha)</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">url_fiche</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">Lien fiche</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">row_number</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[var sArr = params["Nom_Table"].value.split("_") ; this.queryText=this.queryText.replaceAll('param_table_geom', 'tv_geom_zonages_'+sArr[3]);
 this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">ordre</property>
-                    <property name="nativeName">ordre</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">Type de zonage</property>
-                    <property name="nativeName">Type de zonage</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">nom_site</property>
-                    <property name="nativeName">nom_site</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">Surface totale origine (ha)</property>
-                    <property name="nativeName">Surface totale origine (ha)</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">Surface intersectée (ha)</property>
-                    <property name="nativeName">Surface intersectée (ha)</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">url_fiche</property>
-                    <property name="nativeName">url_fiche</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">Lien fiche</property>
-                    <property name="nativeName">Lien fiche</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">row_number</property>
-                    <property name="nativeName">row_number</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-            </list-property>
+            <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[select *, row_number() over() from (
 
 --Gestion
 --sites du conservatoir
-SELECT '1' as "ordre", 'Sites du conservatoire du littoral' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' As "Lien fiche"
+SELECT '1' as "ordre", 'Sites du conservatoire du littoral' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", 'Pas de lien' As "Lien fiche"
 FROM carmen.terrains_du_conservatoire_du_littoral t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --Inventaires
 --znieff de type I
-SELECT '2' as "ordre", 'Znieff de type I' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", fiche as "url_fiche" , 'Lien'  as "Lien fiche"
+SELECT '2' as "ordre", 'Znieff de type I' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.znieff_de_type_i t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --znieff de type II
-SELECT '3' as "ordre",'Znieff de type II' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",  fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '3' as "ordre",'Znieff de type II' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.znieff_de_type_ii t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
+UNION ALL
+--znieff zico
+SELECT '4' as "ordre", 'Zico' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
+FROM carmen.zico__oiseaux_ t
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --N2000
 --habitats
-SELECT '5' as "ordre", 'N2000 directives habitats' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", lien_fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '5' as "ordre", 'N2000 directives habitats' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.n2000_directive_habitats t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --oiseaux
-SELECT '6' as "ordre", 'N2000 directives oiseaux' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", lien_fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '6' as "ordre", 'N2000 directives oiseaux' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.n2000_directive_oiseaux t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --paysages
 
 --Sites classés
-SELECT '7' as "ordre", 'Sites Classés' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche , 'Lien' as "Lien fiche"
+SELECT '7' as "ordre", 'Sites Classés' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.sites_classes t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --Sites inscrits
-SELECT '8' as "ordre", 'Sites inscrits' as "Type de zonage", upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche , 'Lien' as "Lien fiche"
+SELECT '8' as "ordre", 'Sites inscrits' as "Type de zonage", upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.sites_inscrits t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 
 --Réglementations
 --APPB
-SELECT '9' as "ordre", 'APPB' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(surfsig_ha as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",url_fiche , 'Lien' As "Lien fiche"
-FROM carmen.appb t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+SELECT '9' as "ordre", 'APPB' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(superficie as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", 'Pas de lien' As "Lien fiche"
+FROM carmen.arretes_de_protection_de_biotope t
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
---Réserves biologiques
-SELECT '10' as "ordre", 'Réserves biologiques' as "Type de zonage",'' as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", '' as "url_fiche", 'Pas de fiche' as "Lien fiche"
-FROM carmen.reserves_biologiques t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+--Réserves biologiques ONF
+SELECT '10' as "ordre", 'Réserves biologiques ONF' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
+FROM carmen.reserves_biologiques_onf t
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --Réserves naturelles nationales
-SELECT '11' as "ordre", 'Réserves naturelles nationales' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' as "Lien fiche"
+SELECT '11' as "ordre", 'Réserves naturelles nationales' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.reserves_naturelles_nationales t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION ALL
 --Réserves naturelles régionales
-SELECT '12' as "ordre", 'Réserves naturelles régionales' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' as "Lien fiche"
+SELECT '12' as "ordre", 'Réserves naturelles régionales' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.reserves_naturelles_regionales t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 
 ORDER BY ordre asc) t
 ]]></xml-property>
@@ -705,10 +695,10 @@ ORDER BY ordre asc
                     <text-property name="heading">Type de zonage</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">nom_site</property>
+                    <property name="columnName">nom</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">nom_site</text-property>
-                    <text-property name="heading">nom_site</text-property>
+                    <text-property name="displayName">nom</text-property>
+                    <text-property name="heading">nom</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Surface totale origine (ha)</property>
@@ -721,12 +711,6 @@ ORDER BY ordre asc
                     <property name="analysis">measure</property>
                     <text-property name="displayName">Surface intersectée (ha)</text-property>
                     <text-property name="heading">Surface intersectée (ha)</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">url_fiche</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">url_fiche</text-property>
-                    <text-property name="heading">url_fiche</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Lien fiche</property>
@@ -756,7 +740,7 @@ ORDER BY ordre asc
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">nom_site</property>
+                        <property name="name">nom</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -771,16 +755,11 @@ ORDER BY ordre asc
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">url_fiche</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
                         <property name="name">Lien fiche</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">7</property>
                         <property name="name">row_number</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -805,8 +784,8 @@ ORDER BY ordre asc
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">nom_site</property>
-                    <property name="nativeName">nom_site</property>
+                    <property name="name">nom</property>
+                    <property name="nativeName">nom</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
@@ -826,20 +805,13 @@ ORDER BY ordre asc
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">url_fiche</property>
-                    <property name="nativeName">url_fiche</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
                     <property name="name">Lien fiche</property>
                     <property name="nativeName">Lien fiche</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">7</property>
                     <property name="name">row_number</property>
                     <property name="nativeName">row_number</property>
                     <property name="dataType">decimal</property>
@@ -850,67 +822,72 @@ ORDER BY ordre asc
 
 --Gestion
 --sites du conservatoir
-SELECT '1' as "ordre", 'Sites du conservatoire du littoral' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' As "Lien fiche"
+SELECT '1' as "ordre", 'Sites du conservatoire du littoral' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", 'Pas de lien' As "Lien fiche"
 FROM carmen.terrains_du_conservatoire_du_littoral t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --Inventaires
 --znieff de type I
-SELECT '2' as "ordre", 'Znieff de type I' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", fiche as "url_fiche" , 'Lien'  as "Lien fiche"
+SELECT '2' as "ordre", 'Znieff de type I' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.znieff_de_type_i t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --znieff de type II
-SELECT '3' as "ordre",'Znieff de type II' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",  fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '3' as "ordre",'Znieff de type II' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.znieff_de_type_ii t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+UNION ALL
+--znieff zico
+SELECT '4' as "ordre", 'Zico' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
+FROM carmen.zico__oiseaux_ t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --N2000
 --habitats
-SELECT '5' as "ordre", 'N2000 directives habitats' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", lien_fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '5' as "ordre", 'N2000 directives habitats' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.n2000_directive_habitats t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --oiseaux
-SELECT '6' as "ordre", 'N2000 directives oiseaux' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", lien_fiche as "url_fiche" , 'Lien' as "Lien fiche"
+SELECT '6' as "ordre", 'N2000 directives oiseaux' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.n2000_directive_oiseaux t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --paysages
 
 --Sites classés
-SELECT '7' as "ordre", 'Sites Classés' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche , 'Lien' as "Lien fiche"
+SELECT '7' as "ordre", 'Sites Classés' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.sites_classes t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --Sites inscrits
-SELECT '8' as "ordre", 'Sites inscrits' as "Type de zonage", upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche , 'Lien' as "Lien fiche"
+SELECT '8' as "ordre", 'Sites inscrits' as "Type de zonage", upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.sites_inscrits t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 
 --Réglementations
 --APPB
-SELECT '9' as "ordre", 'APPB' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(surfsig_ha as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",url_fiche , 'Lien' As "Lien fiche"
-FROM carmen.appb t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+SELECT '9' as "ordre", 'APPB' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2)  AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", 'Pas de lien' As "Lien fiche"
+FROM carmen.arretes_de_protection_de_biotope t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
---Réserves biologiques
-SELECT '10' as "ordre", 'Réserves biologiques' as "Type de zonage",'' as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", '' as "url_fiche", 'Pas de fiche' as "Lien fiche"
-FROM carmen.reserves_biologiques t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+--Réserves biologiques ONF
+SELECT '10' as "ordre", 'Réserves biologiques ONF' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
+FROM carmen.reserves_biologiques_onf t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --Réserves naturelles nationales
-SELECT '11' as "ordre", 'Réserves naturelles nationales' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' as "Lien fiche"
+SELECT '11' as "ordre", 'Réserves naturelles nationales' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.reserves_naturelles_nationales t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 UNION ALL
 --Réserves naturelles régionales
-SELECT '12' as "ordre", 'Réserves naturelles régionales' as "Type de zonage",upper(left(nom_site,1))||lower(right(nom_site,length(nom_site)-1)) as nom_site, round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)", url_fiche, 'Lien' as "Lien fiche"
+SELECT '12' as "ordre", 'Réserves naturelles régionales' as "Type de zonage",upper(left(nom,1))||lower(right(nom,length(nom)-1)) as nom, round(cast(st_area(t.the_geom)/10000 as numeric),2) AS "Surface totale origine (ha)", round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)", '<a href="' || fic_inter || '" TARGET="_blank">' || 'Lien' || '</a>' as "Lien fiche"
 FROM carmen.reserves_naturelles_regionales t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), ST_Makevalid(t.gez_geometry),0)
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
 
-ORDER BY ordre asc) t
+ORDER BY ordre asc) as t
 ]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_Diag_Zonages" id="2392">
@@ -958,7 +935,140 @@ ORDER BY ordre asc) t
                     <text-property name="heading">row_number</text-property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_4</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_5</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">5</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_6</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">6</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_7</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">7</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_8</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">8</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_9</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">9</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_10</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">10</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_11</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">11</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_12</property>
+                    <property name="paramName">ID_Zonage</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">12</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1043,109 +1153,336 @@ this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageV
             <xml-property name="queryText"><![CDATA[select *, row_number() over() from (
 SELECT 'Sites du conservatoire du littoral' as "Type de zonage", 
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.terrains_du_conservatoire_du_littoral t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 
 SELECT 'NIEFF de type I' as "Type de zonage", 
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.znieff_de_type_i t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'ZNIEFF de type II' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.znieff_de_type_ii t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
+UNION
+SELECT 'Zico' as "Type de zonage", 
+round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+FROM carmen.zico__oiseaux_ t
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'N2000 directives habitats' as "Type de zonage",  
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.n2000_directive_habitats t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'N2000 directives oiseaux' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.n2000_directive_oiseaux t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'Sites classés' as "Type de zonage", 
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.sites_classes t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'Sites inscrits' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.sites_inscrits t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'APPB' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
-FROM carmen.appb t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+FROM carmen.arretes_de_protection_de_biotope t
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
-SELECT 'Réserves biologiques' as "Type de zonage",
+SELECT 'Réserves biologiques ONF' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
-FROM carmen.reserves_biologiques t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+FROM carmen.reserves_biologiques_onf t
+JOIN tv_geom_zonages_commune gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'Réserves naturelles nationales' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.reserves_naturelles_nationales t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 UNION
 SELECT 'Réserves naturelles régionales' as "Type de zonage",
 round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,ST_Makevalid(t.gez_geometry)))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
+sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2)) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(sum(round(cast(st_area(st_intersection(gzc.gez_geometry,t.the_geom))/10000 as numeric),2))/round(sum(round(cast(st_area(gzc.gez_geometry)/10000 as numeric),2))/count(*))*100,2) as proportion
 FROM carmen.reserves_naturelles_regionales t
-JOIN param_table_geom gzc ON ST_DWithin(gzc.gez_geometry, ST_Makevalid(t.gez_geometry),0)
-WHERE gzc.gez_id_geom_zonage in ListeIdZonage
+JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.the_geom)
+WHERE gez_id_geom_zonage in ListeIdZonage
 GROUP BY "Type de zonage"
 ) as toto 
 where proportion is not null]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>9</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>10</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>11</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>12</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -2015,7 +2352,6 @@ where proportion is not null]]></xml-property>
                 </structure>
                 <structure>
                     <property name="columnName">proportion</property>
-                    <property name="analysis">measure</property>
                     <text-property name="displayName">proportion</text-property>
                     <text-property name="heading">proportion</text-property>
                 </structure>
@@ -2110,93 +2446,122 @@ where proportion is not null]]></xml-property>
             </list-property>
             <xml-property name="queryText"><![CDATA[select *, row_number() over() from (
 SELECT 'Sites du conservatoire du littoral' as "Type de zonage", 
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.terrains_du_conservatoire_du_littoral t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
-UNION
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.terrains_du_conservatoire_du_littoral  t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
 
-SELECT 'NIEFF de type I' as "Type de zonage", 
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.znieff_de_type_i t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+UNION
+SELECT 'ZNIEFF de type I' as "Type de zonage", 
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.znieff_de_type_i t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
 SELECT 'ZNIEFF de type II' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.znieff_de_type_ii t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.znieff_de_type_ii t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
-SELECT 'N2000 directives habitats' as "Type de zonage",  
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.n2000_directive_habitats t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+SELECT 'Zico' as "Type de zonage",
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.zico__oiseaux_ t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
+UNION
+SELECT 'N2000 directives habitats' as "Type de zonage",
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.n2000_directive_habitats  t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
 SELECT 'N2000 directives oiseaux' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.n2000_directive_oiseaux t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.n2000_directive_oiseaux  t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
 SELECT 'Sites classés' as "Type de zonage", 
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.sites_classes t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.sites_classes  t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
 SELECT 'Sites inscrits' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
 FROM carmen.sites_inscrits t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
-SELECT 'APPB' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.appb t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+SELECT 'APPB' as "Type de zonage", 
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.arretes_de_protection_de_biotope t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
 UNION
-SELECT 'Réserves biologiques' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.reserves_biologiques t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+SELECT 'Réserves biologiques ONF' as "Type de zonage",
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.reserves_biologiques_onf  t 
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 UNION
 SELECT 'Réserves naturelles nationales' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.reserves_naturelles_nationales t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.reserves_naturelles_nationales  t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
 UNION
 SELECT 'Réserves naturelles régionales' as "Type de zonage",
-round(sum(round(cast(st_area(gez_geometry)/10000 as numeric),2))/count(*)) AS "Surface totale origine (ha)",
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2) as "Surface intersectée (ha)",
-sum(round(cast(st_area(ST_Makevalid(t.gez_geometry))/10000 as numeric),2)) as surf_totale_objet,  
-round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry)))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
-FROM carmen.reserves_naturelles_regionales t
-WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makevalid(t.gez_geometry),0)group by t.gez_geometry
+round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2) AS "Surface totale origine (ha)", 
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2) as "Surface intersectée (ha)",
+sum(round(cast(st_area(t.the_geom)/10000 as numeric),2)) as surf_totale_objet,  
+round(cast(st_area(st_intersection(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom))/10000 as numeric),2)/round(cast(st_area(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154))/10000 as numeric),2)*100 as proportion
+FROM carmen.reserves_naturelles_regionales  t
+WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),t.the_geom)
+group by t.the_geom
+
 ) as t]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2359,9 +2724,8 @@ WHERE ST_DWithin(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),ST_Makeval
                     <expression name="valueExpr">var annee = new Date().getFullYear();&#13;
 var mois = new Date().getMonth()+1;&#13;
 var jour = new Date().getDate();&#13;
-var protocol = window.location.protocol;&#13;
 &#13;
-"&lt;a href=\""+protocol+"//www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">"+protocol+"//www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\""+protocol+"//www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+"&lt;a href=\"http://www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\"http://www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
                     <property name="contentType">html</property>
                 </text-data>
             </page-footer>
@@ -2416,9 +2780,15 @@ var protocol = window.location.protocol;&#13;
             <expression name="valueExpr">"&lt;b>Zonages environnementaux - Surface de l'objet interrogé :&lt;/b> " + Math.round(row["Surface totale origine (ha)"]) + " ha"</expression>
             <property name="contentType">html</property>
         </text-data>
-        <table name="EBZR_tab_zonages_environnementaux" id="2532">
+        <table name="EBZR_tab_zonages_environnementaux" id="2461">
             <property name="dataSet">EBZR_ListeZonagesEnvironnementaux</property>
             <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ordre</property>
+                    <text-property name="displayName">ordre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ordre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
                 <structure>
                     <property name="name">Type de zonage</property>
                     <text-property name="displayName">Type de zonage</text-property>
@@ -2426,9 +2796,9 @@ var protocol = window.location.protocol;&#13;
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">nom_site</property>
-                    <text-property name="displayName">nom_site</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["nom_site"]</expression>
+                    <property name="name">nom</property>
+                    <text-property name="displayName">nom</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["nom"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -2450,102 +2820,101 @@ var protocol = window.location.protocol;&#13;
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">ordre</property>
-                    <text-property name="displayName">ordre</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["ordre"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">url_fiche</property>
-                    <text-property name="displayName">url_fiche</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["url_fiche"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
                     <property name="name">row_number</property>
                     <text-property name="displayName">row_number</text-property>
                     <expression name="expression" type="javascript">dataSetRow["row_number"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
             </list-property>
-            <column id="2561"/>
-            <column id="2562"/>
-            <column id="2563"/>
-            <column id="2564"/>
-            <column id="2565"/>
+            <column id="2490"/>
+            <column id="2491"/>
+            <column id="2492"/>
+            <column id="2493"/>
+            <column id="2494"/>
             <header>
-                <row id="2533">
-                    <cell id="2534">
-                        <label id="2535">
+                <row id="2462">
+                    <cell id="2463">
+                        <label id="2464">
                             <text-property name="text">Type de zonage</text-property>
                         </label>
                     </cell>
-                    <cell id="2536">
-                        <label id="2537">
-                            <text-property name="text">Nom</text-property>
+                    <cell id="2465">
+                        <label id="2466">
+                            <text-property name="text">nom</text-property>
                         </label>
                     </cell>
-                    <cell id="2538">
-                        <label id="2539">
-                            <text-property name="text">Surface totale origine (ha)</text-property>
+                    <cell id="2467">
+                        <label id="2468">
+                            <text-property name="text">Surface totale (ha)</text-property>
                         </label>
                     </cell>
-                    <cell id="2540">
-                        <label id="2541">
+                    <cell id="2469">
+                        <label id="2470">
                             <text-property name="text">Surface intersectée (ha)</text-property>
                         </label>
                     </cell>
-                    <cell id="2542">
-                        <label id="2543">
+                    <cell id="2471">
+                        <label id="2472">
                             <text-property name="text">Lien fiche</text-property>
                         </label>
                     </cell>
                 </row>
             </header>
             <detail>
-                <row id="2544">
-                    <cell id="2545">
-                        <data id="2546">
+                <row id="2473">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#FFFFFF</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">1</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#F2F2F2</property>
+                            <expression name="testExpr" type="javascript">(row["row_number"]%2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">0</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <cell id="2474">
+                        <data id="2475">
                             <property name="resultSetColumn">Type de zonage</property>
                         </data>
                     </cell>
-                    <cell id="2547">
-                        <data id="2548">
-                            <property name="resultSetColumn">nom_site</property>
+                    <cell id="2476">
+                        <data id="2477">
+                            <property name="resultSetColumn">nom</property>
                         </data>
                     </cell>
-                    <cell id="2549">
-                        <data id="2550">
+                    <cell id="2478">
+                        <data id="2479">
                             <property name="resultSetColumn">Surface totale origine (ha)</property>
                         </data>
                     </cell>
-                    <cell id="2551">
-                        <data id="2552">
+                    <cell id="2480">
+                        <data id="2481">
                             <property name="resultSetColumn">Surface intersectée (ha)</property>
                         </data>
                     </cell>
-                    <cell id="2553">
-                        <data id="2554">
-                            <property name="resultSetColumn">Lien fiche</property>
-                            <list-property name="action">
-                                <structure>
-                                    <property name="linkType">hyperlink</property>
-                                    <property name="toolTip">Fiche d'informations du zonage</property>
-                                    <expression name="uri" type="javascript">row["url_fiche"]</expression>
-                                    <property name="targetWindow">_blank</property>
-                                </structure>
-                            </list-property>
-                        </data>
+                    <cell id="2482">
+                        <text-data id="2497">
+                            <expression name="valueExpr">row["Lien fiche"]</expression>
+                            <property name="contentType">html</property>
+                        </text-data>
                     </cell>
                 </row>
             </detail>
             <footer>
-                <row id="2555">
-                    <cell id="2556"/>
-                    <cell id="2557"/>
-                    <cell id="2558"/>
-                    <cell id="2559"/>
-                    <cell id="2560"/>
+                <row id="2484">
+                    <cell id="2485"/>
+                    <cell id="2486"/>
+                    <cell id="2487"/>
+                    <cell id="2488"/>
+                    <cell id="2489"/>
                 </row>
             </footer>
         </table>

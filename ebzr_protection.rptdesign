@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">2120</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">2120</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">2120</property>
+        </structure>
+    </list-property>
     <property name="units">in</property>
     <method name="initialize"><![CDATA[if(params["FileObs"]!="") {
 	// Périmetre personnalisé
@@ -107,6 +121,9 @@ if(params["Tbl_Echelon"]!="") {
             <property name="isRequired">false</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">kiij</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -134,7 +151,7 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
@@ -160,48 +177,56 @@ if(params["Tbl_Echelon"]!="") {
 this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection,
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection,
 gta_nom_groupe_taxonomique
 
 FROM param_table a
-LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref and tax_cd_ref = tax_cd_nom
+LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 JOIN t_taxon_observe e ON a.tao_id_taxon = e.tao_id_taxon
 JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_taxonomique
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 GROUP BY type_protection,gta_nom_groupe_taxonomique
-) as query where type_protection !='z'-- on enlève les réglementations doublons]]></xml-property>
+]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_Protection_HistogrammePerso" id="1995">
             <list-property name="columnHints"/>
@@ -210,48 +235,55 @@ GROUP BY type_protection,gta_nom_groupe_taxonomique
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection,
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection,
 gta_nom_groupe_taxonomique
 
 FROM t_observation_taxon a
-LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref and tax_cd_ref = tax_cd_nom
+LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 JOIN t_taxon_observe e ON a.tao_id_taxon = e.tao_id_taxon
 JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_taxonomique
 
-WHERE ota_id_obs_taxon in ListeIdObs AND tar_id_rang >= 193
-GROUP BY type_protection,gta_nom_groupe_taxonomique
-) as query where type_protection !='z'-- on enlève les réglementations doublons]]></xml-property>
+WHERE ota_id_obs_taxon IN ListeIdObs
+GROUP BY type_protection,gta_nom_groupe_taxonomique]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_Synth_Protection" id="722">
             <list-property name="columnHints"/>
@@ -273,47 +305,52 @@ GROUP BY type_protection,gta_nom_groupe_taxonomique
 this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection
-
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection
 
 FROM param_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
-LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref AND b.tax_cd_nom = b.tax_cd_ref
+LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
-WHERE gez_id_geom_zonage in ListeIdZonage AND tar_id_rang >= 193
+WHERE gez_id_geom_zonage in ListeIdZonage
 GROUP BY type_protection
-) as query where type_protection !='z'-- on enlève les réglementations doublons
-
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -404,12 +441,10 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 'CDO1' --europeen
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
 ,'cricetus_1'
-,'E70P2'
 ,'gypaete1'
-,'IBO1' --international
-,'IBOAE'
+,'IAAP'
 ,'NA'
 ,'NAR2'
 ,'NAR3'
@@ -417,24 +452,31 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
 ELSE ( 'Pas de protection' ) END ) AS type_protection
-
 
 FROM echelon_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
@@ -538,12 +580,10 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 'CDO1' --europeen
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
 ,'cricetus_1'
-,'E70P2'
 ,'gypaete1'
-,'IBO1' --international
-,'IBOAE'
+,'IAAP'
 ,'NA'
 ,'NAR2'
 ,'NAR3'
@@ -551,22 +591,30 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
 ELSE ( 'Pas de protection' ) END ) AS type_protection,
 gta_nom_groupe_taxonomique
 
@@ -634,47 +682,52 @@ GROUP BY type_protection,gta_nom_groupe_taxonomique
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
-,'OC5') THEN 'Protection nationale' 
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection
-
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection
 
 FROM t_observation_taxon a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
-LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref AND b.tax_cd_nom = b.tax_cd_ref
+LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
-WHERE ota_id_obs_taxon in ListeIdObs AND tar_id_rang >= 193
+WHERE ota_id_obs_taxon IN ListeIdObs
 GROUP BY type_protection
-) as query where type_protection !='z'-- on enlève les réglementations doublons
-
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -729,6 +782,104 @@ GROUP BY type_protection
     </design:resultSetDefinitions>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="test_chart" id="2120">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">count</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type_protection</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">type_protection</text-property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">type_protection</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">type_protection</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('param_table', params["Nom_Table"]);
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
+            <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count</property>
+                    <property name="nativeName">count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">type_protection</property>
+                    <property name="nativeName">type_protection</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
+
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
+,'gypaete1'
+,'IAAP'
+,'NA'
+,'NAR2'
+,'NAR3'
+,'NAR4'
+,'NAR5'
+,'NAR6'
+,'NEC1'
+,'NFM1'
+,'NI2'
+,'NI3'
+,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
+,'NMO2'
+,'NMO3'
+,'NMO4'
+,'NO3'
+,'NO4'
+,'NP1'
+,'NTAA1'
+,'NTM1'
+,'NV1'
+,'NV2'
+,'NVM'
+,'OC2'
+,'OC4'
+,'OC5'
+,'V39P1') THEN 'Protection nationale' 
+WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection
+
+FROM param_table a
+LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
+LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
+
+WHERE gez_id_geom_zonage in ListeIdZonage
+GROUP BY type_protection]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -1075,39 +1226,29 @@ var protocol = window.location.protocol;&#13;
 {&#xD;
  if( dph.getBaseDisplayValue() == &quot;Protection nationale&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(255, 87, 51);&#xD;
+        fill.set(1, 0, 131);&#xD;
     }&#xD;
  if( dph.getBaseDisplayValue() == &quot;Protection régionale&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(26, 82, 118);&#xD;
+        fill.set(29, 144, 153);&#xD;
     }&#xD;
- if( dph.getBaseDisplayValue() == &quot;Protection internationale&quot; ){&#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-	     fill.set(93, 173, 226);&#xD;
-	}&#xD;
-    &#xD;
- if( dph.getBaseDisplayValue() == &quot;Pas de protection et pas de réglementation&quot; ){&#xD;
+ if( dph.getBaseDisplayValue() == &quot;Pas de protection&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
         fill.set(220, 220, 200);&#xD;
     }&#xD;
-    &#xD;
 }&#xD;
 &#xD;
 function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
 {&#xD;
   if( lerh.getLabel().getCaption().getValue() == &quot;Protection nationale&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(255, 87, 51);&#xD;
+        lerh.getFill().set(1, 0, 131);&#xD;
     }&#xD;
   if( lerh.getLabel().getCaption().getValue() == &quot;Protection régionale&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(26, 82, 118);&#xD;
+        lerh.getFill().set(29, 144, 153);&#xD;
     }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Protection internationale&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(93, 173, 226);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Pas de protection et pas de réglementation&quot;){              &#xD;
+  if( lerh.getLabel().getCaption().getValue() == &quot;Pas de protection&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
         lerh.getFill().set(220, 220, 220);&#xD;
     }&#xD;
@@ -2004,46 +2145,35 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
   <Dimension>Two_Dimensional_With_Depth</Dimension>
   <Script>function beforeDrawDataPoint( dph, fill, icsc )&#xD;
 {&#xD;
- if( dph.getSeriesDisplayValue() == &quot;Protection nationale&quot; ){&#xD;
+ if( dph.getSeriesDisplayValue()  == &quot;Protection nationale&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(255, 87, 51);&#xD;
+        fill.set(1, 0, 131);&#xD;
     }&#xD;
- if( dph.getSeriesDisplayValue() == &quot;Protection régionale&quot; ){&#xD;
+ if( dph.getSeriesDisplayValue()  == &quot;Protection régionale&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(26, 82, 118);&#xD;
+        fill.set(29, 144, 153);&#xD;
     }&#xD;
- if( dph.getSeriesDisplayValue() == &quot;Protection internationale&quot; ){&#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-	     fill.set(93, 173, 226);&#xD;
-	}&#xD;
-    &#xD;
- if( dph.getSeriesDisplayValue() == &quot;Pas de protection et pas de réglementation&quot; ){&#xD;
+ if( dph.getSeriesDisplayValue()  == &quot;Pas de protection&quot; ){&#xD;
   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
         fill.set(220, 220, 200);&#xD;
     }&#xD;
-    &#xD;
 }&#xD;
 &#xD;
 function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
 {&#xD;
   if( lerh.getLabel().getCaption().getValue() == &quot;Protection nationale&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(255, 87, 51);&#xD;
+        lerh.getFill().set(1, 0, 131);&#xD;
     }&#xD;
   if( lerh.getLabel().getCaption().getValue() == &quot;Protection régionale&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(26, 82, 118);&#xD;
+        lerh.getFill().set(29, 144, 153);&#xD;
     }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Protection internationale&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(93, 173, 226);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Pas de protection et pas de réglementation&quot;){              &#xD;
+  if( lerh.getLabel().getCaption().getValue() == &quot;Pas de protection&quot;){              &#xD;
    importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
         lerh.getFill().set(220, 220, 220);&#xD;
     }&#xD;
-}&#xD;
-</Script>
+}</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <ExtendedProperties>
@@ -3340,11 +3470,892 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
                         <property name="contentType">html</property>
                         <text-property name="content"><![CDATA[<FONT size="4"><CENTER><B>
 Bilan par groupes d'espèces
-</B></CENTER></FONT>]]></text-property>
+</B></CENTER></FONT> ]]></text-property>
                     </text>
                 </cell>
             </row>
         </grid>
+        <extended-item extensionName="Chart" id="2122">
+            <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithoutAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
+  <Version>2.6.1</Version>
+  <Type>Pie Chart</Type>
+  <SubType>Standard</SubType>
+  <Block>
+    <Children xsi:type="layout:TitleBlock">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value>test ettriki</Value>
+          <Font>
+            <Size>16.0</Size>
+            <Bold>true</Bold>
+            <Alignment>
+              <horizontalAlignment>Center</horizontalAlignment>
+              <verticalAlignment>Center</verticalAlignment>
+            </Alignment>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>true</Visible>
+      </Label>
+    </Children>
+    <Children xsi:type="layout:Plot">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Background xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Background>
+      <Visible>true</Visible>
+      <HorizontalSpacing>5</HorizontalSpacing>
+      <VerticalSpacing>5</VerticalSpacing>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>0.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>0.0</Right>
+        </Insets>
+      </ClientArea>
+    </Children>
+    <Children xsi:type="layout:Legend">
+      <Bounds>
+        <Left>0.0</Left>
+        <Top>0.0</Top>
+        <Width>0.0</Width>
+        <Height>0.0</Height>
+      </Bounds>
+      <Insets>
+        <Top>3.0</Top>
+        <Left>3.0</Left>
+        <Bottom>3.0</Bottom>
+        <Right>3.0</Right>
+      </Insets>
+      <Row>-1</Row>
+      <Column>-1</Column>
+      <Rowspan>-1</Rowspan>
+      <Columnspan>-1</Columnspan>
+      <Outline>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>false</Visible>
+      </Outline>
+      <Visible>true</Visible>
+      <Cursor>
+        <Type>Auto</Type>
+      </Cursor>
+      <ClientArea>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>0</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>2.0</Top>
+          <Left>2.0</Left>
+          <Bottom>2.0</Bottom>
+          <Right>2.0</Right>
+        </Insets>
+      </ClientArea>
+      <Text>
+        <Value></Value>
+        <Font>
+          <Alignment/>
+        </Font>
+      </Text>
+      <Orientation>Horizontal</Orientation>
+      <Direction>Top_Bottom</Direction>
+      <Separator>
+        <Style>Solid</Style>
+        <Thickness>1</Thickness>
+        <Color>
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Color>
+        <Visible>true</Visible>
+      </Separator>
+      <Position>Above</Position>
+      <ItemType>Categories</ItemType>
+      <Title>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Title>
+      <TitlePosition>Above</TitlePosition>
+    </Children>
+    <Bounds>
+      <Left>0.0</Left>
+      <Top>0.0</Top>
+      <Width>752.25</Width>
+      <Height>376.125</Height>
+    </Bounds>
+    <Insets>
+      <Top>3.0</Top>
+      <Left>3.0</Left>
+      <Bottom>3.0</Bottom>
+      <Right>3.0</Right>
+    </Insets>
+    <Row>-1</Row>
+    <Column>-1</Column>
+    <Rowspan>-1</Rowspan>
+    <Columnspan>-1</Columnspan>
+    <Outline>
+      <Style>Solid</Style>
+      <Thickness>1</Thickness>
+      <Color>
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Color>
+      <Visible>false</Visible>
+    </Outline>
+    <Visible>true</Visible>
+  </Block>
+  <Dimension>Two_Dimensional</Dimension>
+  <Units>Points</Units>
+  <SeriesThickness>10.0</SeriesThickness>
+  <GridColumnCount>0</GridColumnCount>
+  <ExtendedProperties>
+    <Name>enable.area.alt</Name>
+    <Value>false</Value>
+  </ExtendedProperties>
+  <SampleData>
+    <BaseSampleData>
+      <DataSetRepresentation>'A','B','C','D','E'</DataSetRepresentation>
+    </BaseSampleData>
+    <OrthogonalSampleData>
+      <DataSetRepresentation>6,4,12,8,10</DataSetRepresentation>
+      <SeriesDefinitionIndex>0</SeriesDefinitionIndex>
+    </OrthogonalSampleData>
+  </SampleData>
+  <Interactivity/>
+  <EmptyMessage>
+    <Caption>
+      <Value>This chart contains no data.</Value>
+      <Font>
+        <Alignment>
+          <horizontalAlignment>Center</horizontalAlignment>
+          <verticalAlignment>Center</verticalAlignment>
+        </Alignment>
+      </Font>
+    </Caption>
+    <Background xsi:type="attribute:ColorDefinition">
+      <Transparency>64</Transparency>
+      <Red>127</Red>
+      <Green>127</Green>
+      <Blue>127</Blue>
+    </Background>
+    <Outline>
+      <Color>
+        <Transparency>128</Transparency>
+        <Red>127</Red>
+        <Green>127</Green>
+        <Blue>127</Blue>
+      </Color>
+      <Visible>true</Visible>
+    </Outline>
+    <Insets>
+      <Top>10.0</Top>
+      <Left>10.0</Left>
+      <Bottom>10.0</Bottom>
+      <Right>10.0</Right>
+    </Insets>
+    <Visible>false</Visible>
+  </EmptyMessage>
+  <SeriesDefinitions>
+    <Query>
+      <Definition></Definition>
+    </Query>
+    <SeriesPalette>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>80</Red>
+        <Green>166</Green>
+        <Blue>218</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>242</Red>
+        <Green>88</Green>
+        <Blue>106</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>232</Red>
+        <Green>172</Green>
+        <Blue>57</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>64</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>170</Red>
+        <Green>85</Green>
+        <Blue>85</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>192</Red>
+        <Green>192</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>192</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>7</Red>
+        <Green>146</Green>
+        <Blue>94</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>128</Green>
+        <Blue>192</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>64</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>80</Red>
+        <Green>240</Green>
+        <Blue>120</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>0</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>0</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>64</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>128</Red>
+        <Green>128</Green>
+        <Blue>128</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>64</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>0</Red>
+        <Green>0</Green>
+        <Blue>0</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>255</Green>
+        <Blue>255</Blue>
+      </Entries>
+      <Entries xsi:type="attribute:ColorDefinition">
+        <Transparency>255</Transparency>
+        <Red>255</Red>
+        <Green>128</Green>
+        <Blue>0</Blue>
+      </Entries>
+    </SeriesPalette>
+    <SeriesDefinitions>
+      <Query>
+        <Definition></Definition>
+      </Query>
+      <SeriesPalette>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>166</Green>
+          <Blue>218</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>242</Red>
+          <Green>88</Green>
+          <Blue>106</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>232</Red>
+          <Green>172</Green>
+          <Blue>57</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>64</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>170</Red>
+          <Green>85</Green>
+          <Blue>85</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>192</Red>
+          <Green>192</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>192</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>7</Red>
+          <Green>146</Green>
+          <Blue>94</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>128</Green>
+          <Blue>192</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>64</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>80</Red>
+          <Green>240</Green>
+          <Blue>120</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>0</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>0</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>64</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>128</Red>
+          <Green>128</Green>
+          <Blue>128</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>64</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Entries>
+        <Entries xsi:type="attribute:ColorDefinition">
+          <Transparency>255</Transparency>
+          <Red>255</Red>
+          <Green>128</Green>
+          <Blue>0</Blue>
+        </Entries>
+      </SeriesPalette>
+      <Series xsi:type="type:PieSeries">
+        <Visible>true</Visible>
+        <Label>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+            <Visible>false</Visible>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>true</Visible>
+        </Label>
+        <DataDefinition>
+          <Definition>row[&quot;count&quot;]</Definition>
+          <Grouping>
+            <GroupType>Text</GroupType>
+            <AggregateExpression>Sum</AggregateExpression>
+          </Grouping>
+        </DataDefinition>
+        <SeriesIdentifier>Series 1</SeriesIdentifier>
+        <DataPoint>
+          <Components>
+            <Type>Orthogonal_Value</Type>
+          </Components>
+          <Separator>, </Separator>
+        </DataPoint>
+        <LabelPosition>Outside</LabelPosition>
+        <Stacked>false</Stacked>
+        <Triggers>
+          <Condition>onmouseover</Condition>
+          <Action>
+            <Type>Show_Tooltip</Type>
+            <Value xsi:type="attribute:TooltipValue">
+              <Text></Text>
+              <Delay>200</Delay>
+            </Value>
+          </Action>
+        </Triggers>
+        <Explosion>0</Explosion>
+        <Title>
+          <Caption>
+            <Value></Value>
+            <Font>
+              <Size>16.0</Size>
+              <Bold>true</Bold>
+              <Alignment/>
+            </Font>
+          </Caption>
+          <Background xsi:type="attribute:ColorDefinition">
+            <Transparency>0</Transparency>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+          </Background>
+          <Outline>
+            <Style>Solid</Style>
+            <Thickness>1</Thickness>
+            <Color>
+              <Transparency>255</Transparency>
+              <Red>0</Red>
+              <Green>0</Green>
+              <Blue>0</Blue>
+            </Color>
+          </Outline>
+          <Insets>
+            <Top>0.0</Top>
+            <Left>2.0</Left>
+            <Bottom>0.0</Bottom>
+            <Right>3.0</Right>
+          </Insets>
+          <Visible>false</Visible>
+        </Title>
+        <TitlePosition>Above</TitlePosition>
+        <LeaderLineAttributes>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Visible>true</Visible>
+        </LeaderLineAttributes>
+        <LeaderLineLength>10.0</LeaderLineLength>
+      </Series>
+      <Grouping>
+        <GroupType>Text</GroupType>
+        <AggregateExpression>Sum</AggregateExpression>
+      </Grouping>
+    </SeriesDefinitions>
+    <Series>
+      <Visible>true</Visible>
+      <Label>
+        <Caption>
+          <Value></Value>
+          <Font>
+            <Alignment/>
+          </Font>
+        </Caption>
+        <Background xsi:type="attribute:ColorDefinition">
+          <Transparency>0</Transparency>
+          <Red>255</Red>
+          <Green>255</Green>
+          <Blue>255</Blue>
+        </Background>
+        <Outline>
+          <Style>Solid</Style>
+          <Thickness>1</Thickness>
+          <Color>
+            <Transparency>255</Transparency>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+          </Color>
+          <Visible>false</Visible>
+        </Outline>
+        <Insets>
+          <Top>0.0</Top>
+          <Left>2.0</Left>
+          <Bottom>0.0</Bottom>
+          <Right>3.0</Right>
+        </Insets>
+        <Visible>false</Visible>
+      </Label>
+      <DataDefinition>
+        <Definition>row[&quot;type_protection&quot;]</Definition>
+      </DataDefinition>
+      <SeriesIdentifier></SeriesIdentifier>
+      <DataPoint>
+        <Components>
+          <Type>Orthogonal_Value</Type>
+        </Components>
+        <Separator>, </Separator>
+      </DataPoint>
+      <LabelPosition>Outside</LabelPosition>
+      <Stacked>false</Stacked>
+    </Series>
+    <Grouping>
+      <Enabled>true</Enabled>
+      <GroupType>Text</GroupType>
+      <AggregateExpression>Sum</AggregateExpression>
+    </Grouping>
+  </SeriesDefinitions>
+</model:ChartWithoutAxes>
+]]></xml-property>
+            <property name="outputFormat">SVG</property>
+            <property name="inheritColumns">false</property>
+            <property name="height">2.8645833333333335in</property>
+            <property name="width">6.1875in</property>
+            <property name="dataSet">test_chart</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">count</property>
+                    <text-property name="displayName">count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">type_protection</property>
+                    <text-property name="displayName">type_protection</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["type_protection"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </extended-item>
     </body>
     <property name="pageVariables">
         <variable-element name="ListeIdObs">

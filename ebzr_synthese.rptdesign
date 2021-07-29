@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+<report xmlns="https://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <list-property name="userProperties">
         <structure>
             <property name="name">Cube de données.EBZR_Synth_Tab1.x</property>
@@ -175,17 +175,6 @@ if(params["Tbl_Echelon"]!="") {
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
-        <scalar-parameter name="region" id="2119">
-            <property name="valueType">static</property>
-            <property name="dataType">string</property>
-            <property name="distinct">true</property>
-            <list-property name="selectionList"/>
-            <property name="paramType">simple</property>
-            <property name="controlType">text-box</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Sigogne3" id="7">
@@ -206,7 +195,7 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
@@ -300,7 +289,7 @@ SELECT
 	coalesce(ceil(SUM(ST_Area(zh.gez_geometry)) / 10000), 0) as superficie
 FROM
 	param_table_geom c,
-	tv_geom_zonages_zones_humides zh
+	tv_geom_zonages_zones_humides_2015 zh
 WHERE
 	ST_Intersects(c.gez_geometry, zh.gez_geometry)
 and c.gez_id_geom_zonage in ListeIdZonage
@@ -317,7 +306,7 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(c.gez_geometry, h.lpo_geometry)
-	and (oha_interet_n2000 = 'p' OR oha_interet_n2000 = 'PR')
+	and oha_interet_n2000 = 'p'
 	and c.gez_id_geom_zonage in ListeIdZonage
 GROUP BY 
 	c.gez_id_geom_zonage
@@ -334,7 +323,7 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(c.gez_geometry, h.lpo_geometry)
-and (oha_interet_n2000 = 'c' OR oha_interet_n2000 = 'IC')
+and oha_interet_n2000 = 'c'
 and c.gez_id_geom_zonage in ListeIdZonage
 GROUP BY 
 	c.gez_id_geom_zonage
@@ -351,11 +340,103 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(c.gez_geometry, h.lpo_geometry)
-and (oha_interet_n2000 = 'r' OR oha_interet_n2000 = 'IF' OR oha_interet_n2000 = 'IR')
+and oha_interet_n2000 = 'r'
 and c.gez_id_geom_zonage in ListeIdZonage;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -512,7 +593,7 @@ SELECT
 	count(*) as nbtot,
 	coalesce(ceil(SUM(ST_Area(zh.gez_geometry)) / 10000), 0) as superficie
 FROM
-	tv_geom_zonages_zones_humides zh
+	tv_geom_zonages_zones_humides_2015 zh
 WHERE
 	ST_Intersects(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), zh.gez_geometry)
 UNION ALL
@@ -526,7 +607,7 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), h.lpo_geometry)
-and (oha_interet_n2000 = 'p' OR oha_interet_n2000 = 'PR')
+AND oha_interet_n2000 = 'p'
 UNION ALL
 -----------------------------------------------------
 --Habitats intérêt communautaire
@@ -538,7 +619,7 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), h.lpo_geometry)
-AND (oha_interet_n2000 = 'c' OR oha_interet_n2000 = 'IC')
+AND oha_interet_n2000 = 'c'
 UNION ALL
 -------------------------------------------------------
 --Habitats intérêt régional
@@ -550,7 +631,7 @@ FROM
 	tv_obs_habitat_interet_polygone h
 WHERE
 	ST_Intersects(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154), h.lpo_geometry)
-AND oha_interet_n2000 = 'r' OR oha_interet_n2000 = 'IR' OR oha_interet_n2000 = 'IF')
+AND oha_interet_n2000 = 'r'
 
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -766,52 +847,33 @@ AND oha_interet_n2000 = 'r' OR oha_interet_n2000 = 'IR' OR oha_interet_n2000 = '
             </list-property>
             <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('param_table', params["Nom_Table"]);
-this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));
-
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[-- nombre des taxons menacés et quasi menacés avec groupe taxonomique pour la commune choisie
 --total
 SELECT 'menace' as rowname, count(distinct(tao_id_taxon)), 'total' as gta_nom_groupe_taxonomique
 FROM (
+
 SELECT
 a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-max(gta_nom_groupe_taxonomique) as gta_nom_groupe_taxonomique,
-1 as ordre
+d.indice_menace
+
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-JOIN tr_groupe_taxonomique e ON a.gta_id_groupe_taxonomique = e.gta_id_groupe_taxonomique
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) > 5 ) f
 
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+HAVING MAX(indice_menace) >=4 ) f
 
 UNION ALL
-
 
 SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
 'menace' as rowname,count(distinct(tao_id_taxon)) as count,gta_nom_groupe_taxonomique
@@ -819,24 +881,23 @@ FROM (
 
 SELECT
 a.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-	max(gta_nom_groupe_taxonomique) as gta_nom_groupe_taxonomique,
-2 as ordre
+max(b.sta_nom_statut) AS max_statut_uicn,gta_nom_groupe_taxonomique,
+d.indice_menace
+
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 JOIN tr_groupe_taxonomique e ON a.gta_id_groupe_taxonomique = e.gta_id_groupe_taxonomique
+
 WHERE gez_id_geom_zonage in ListeIdZonage
 
 
-GROUP BY a.tao_id_taxon,gta_nom_groupe_taxonomique,ordre
-HAVING MAX(indice_menace) > 5  ) f
-group by gta_nom_groupe_taxonomique,ordre
-
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace,gta_nom_groupe_taxonomique
+HAVING MAX(indice_menace) >=4 ) f
+GROUP BY gta_nom_groupe_taxonomique
 
 UNION ALL
 
@@ -853,10 +914,11 @@ SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
 FROM param_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 AND c.tae_cd_protection IN('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') 
-AND tar_id_rang >= 193
+
 UNION
 
 SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
@@ -864,10 +926,11 @@ SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
 FROM param_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE gez_id_geom_zonage in ListeIdZonage
-AND c.tae_cd_protection IN('cricetus_1','E70P2','gypaete1','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NM2','NMO2','NMO3','NMO4','NO3','NO4','NP1','NV1','NV2','OC2','OC4','OC5','V25P1','V39P1','V70P2')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection IN('CDO1','cricetus_1','gypaete1','IAAP','NA','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NFM1','NI2','NI3','NM2','NMAMmar2','NMAMmar3','NMAMmar5','NMO2','NMO3','NMO4','NO3','NO4','NP1','NTAA1','NTM1','NV1','NV2','NVM','OC2','OC4','OC5','V39P1')
+
 UNION
 
 SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
@@ -875,10 +938,10 @@ SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
 FROM param_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE gez_id_geom_zonage in ListeIdZonage
-AND c.tae_cd_protection in ('RV43','RV26')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection = 'RV43'
 
 ) t
 
@@ -900,7 +963,6 @@ JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_ta
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 AND c.tae_cd_protection IN('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01')
-AND tar_id_rang >= 193
 GROUP BY gta_nom_groupe_taxonomique
 
 UNION
@@ -916,8 +978,7 @@ JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_ta
 
 
 WHERE gez_id_geom_zonage in ListeIdZonage
-AND c.tae_cd_protection IN('cricetus_1','E70P2','gypaete1','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NM2','NMO2','NMO3','NMO4','NO3','NO4','NP1','NV1','NV2','OC2','OC4','OC5','V25P1','V39P1','V70P2')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection IN('CDO1','cricetus_1','gypaete1','IAAP','NA','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NFM1','NI2','NI3','NM2','NMAMmar2','NMAMmar3','NMAMmar5','NMO2','NMO3','NMO4','NO3','NO4','NP1','NTAA1','NTM1','NV1','NV2','NVM','OC2','OC4','OC5','V39P1')
 GROUP BY gta_nom_groupe_taxonomique
 
 UNION
@@ -933,8 +994,7 @@ JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_ta
 
 
 WHERE gez_id_geom_zonage in ListeIdZonage
-AND c.tae_cd_protection IN('RV43','RV26')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection IN('RV43')
 GROUP BY gta_nom_groupe_taxonomique
 
 ) t GROUP BY gta_nom_groupe_taxonomique
@@ -988,6 +1048,152 @@ GROUP BY gta_nom_groupe_taxonomique
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>6</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>7</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>8</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -1065,52 +1271,33 @@ GROUP BY gta_nom_groupe_taxonomique
             <list-property name="columnHints"/>
             <list-property name="parameters"/>
             <structure name="cachedMetaData"/>
-            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));
-
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[-- nombre des taxons menacés et quasi menacés avec groupe taxonomique pour la commune choisie
 --total
 SELECT 'menace' as rowname, count(distinct(tao_id_taxon)), 'total' as gta_nom_groupe_taxonomique
 FROM (
+
 SELECT
 a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-max(gta_nom_groupe_taxonomique) as gta_nom_groupe_taxonomique,
-1 as ordre
+d.indice_menace
+
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-JOIN tr_groupe_taxonomique e ON a.gta_id_groupe_taxonomique = e.gta_id_groupe_taxonomique
 
 WHERE c.ota_id_obs_taxon IN ListeIdObs
 
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) > 5 ) f
 
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+HAVING MAX(indice_menace) >=4 ) f
 
 UNION ALL
-
 
 SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
 'menace' as rowname,count(distinct(tao_id_taxon)) as count,gta_nom_groupe_taxonomique
@@ -1118,43 +1305,43 @@ FROM (
 
 SELECT
 a.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-	max(gta_nom_groupe_taxonomique) as gta_nom_groupe_taxonomique,
-2 as ordre
+max(b.sta_nom_statut) AS max_statut_uicn,gta_nom_groupe_taxonomique,
+d.indice_menace
+
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 JOIN tr_groupe_taxonomique e ON a.gta_id_groupe_taxonomique = e.gta_id_groupe_taxonomique
+
 WHERE c.ota_id_obs_taxon IN ListeIdObs
 
 
-GROUP BY a.tao_id_taxon,gta_nom_groupe_taxonomique,ordre
-HAVING MAX(indice_menace) > 5  ) f
-group by gta_nom_groupe_taxonomique
-
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace,gta_nom_groupe_taxonomique
+HAVING MAX(indice_menace) >=4 ) f
+GROUP BY gta_nom_groupe_taxonomique
 
 UNION ALL
 
 
 -- nombre des taxons protégés au niveau national et régional avec groupe taxonomique pour la commune choisie
 --total
+
 SELECT 'protection' as rowname,sum(tao_id_taxon) as nb_especes_protegees,'total' as gta_nom_groupe_taxonomique
 
 FROM (
 
 SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
-
 FROM t_observation_taxon a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
 AND c.tae_cd_protection IN('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') 
-AND tar_id_rang >= 193
+
 UNION
 
 SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
@@ -1162,10 +1349,13 @@ SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
 FROM t_observation_taxon a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
-AND c.tae_cd_protection IN('cricetus_1','E70P2','gypaete1','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NM2','NMO2','NMO3','NMO4','NO3','NO4','NP1','NV1','NV2','OC2','OC4','OC5','V25P1','V39P1','V70P2')
-AND tar_id_rang >= 193
+
+AND c.tae_cd_protection IN('CDO1','cricetus_1','gypaete1','IAAP','NA','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NFM1','NI2','NI3','NM2','NMAMmar2','NMAMmar3','NMAMmar5','NMO2','NMO3','NMO4','NO3','NO4','NP1','NTAA1','NTM1','NV1','NV2','NVM','OC2','OC4','OC5','V39P1')
+
+
 UNION
 
 SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
@@ -1173,10 +1363,11 @@ SELECT count(distinct(a.tao_id_taxon)) as tao_id_taxon
 FROM t_observation_taxon a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
 LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
-AND c.tae_cd_protection in ('RV43','RV26')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection = 'RV43'
+
 
 ) t
 
@@ -1198,7 +1389,7 @@ JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_ta
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
 AND c.tae_cd_protection IN('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01')
-AND tar_id_rang >= 193
+
 GROUP BY gta_nom_groupe_taxonomique
 
 UNION
@@ -1213,8 +1404,8 @@ JOIN t_taxon_observe e ON a.tao_id_taxon = e.tao_id_taxon
 JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_taxonomique
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
-AND c.tae_cd_protection IN('cricetus_1','E70P2','gypaete1','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NI2','NI3','NM2','NMO2','NMO3','NMO4','NO3','NO4','NP1','NV1','NV2','OC2','OC4','OC5','V25P1','V39P1','V70P2')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection IN('CDO1','cricetus_1','gypaete1','IAAP','NA','NAR2','NAR3','NAR4','NAR5','NAR6','NEC1','NFM1','NI2','NI3','NM2','NMAMmar2','NMAMmar3','NMAMmar5','NMO2','NMO3','NMO4','NO3','NO4','NP1','NTAA1','NTM1','NV1','NV2','NVM','OC2','OC4','OC5','V39P1')
+
 GROUP BY gta_nom_groupe_taxonomique
 
 UNION
@@ -1229,8 +1420,8 @@ JOIN tr_groupe_taxonomique f ON e.gta_id_groupe_taxonomique = f.gta_id_groupe_ta
 
 WHERE a.ota_id_obs_taxon IN ListeIdObs
 
-AND c.tae_cd_protection IN('RV43','RV26')
-AND tar_id_rang >= 193
+AND c.tae_cd_protection IN('RV43')
+
 GROUP BY gta_nom_groupe_taxonomique) t GROUP BY gta_nom_groupe_taxonomique
 
 UNION ALL
@@ -1392,23 +1583,7 @@ GROUP BY gta_nom_groupe_taxonomique
             </list-property>
             <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('param_table', params["Nom_Table"]);
-this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
@@ -1418,19 +1593,19 @@ FROM (
 SELECT
 a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
+d.indice_menace
 
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 
 
-GROUP BY a.tao_id_taxon
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
 HAVING MAX(indice_menace) > 5 ) f
 
 UNION
@@ -1442,45 +1617,46 @@ FROM (
 SELECT
 a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
+d.indice_menace
 
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 
 
-GROUP BY a.tao_id_taxon
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
 HAVING MAX(indice_menace) >= 4 AND MAX(indice_menace) <= 5 ) f --nt et dd 
 
 UNION
 
 SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
-count(distinct(tao_id_taxon)) as total, 'Espèces à préoccupation mineure et espèces non évaluées' as type_menace
+count(distinct(tao_id_taxon)) as total, 'Espèces à préoccupation mineure et non évaluées' as type_menace
 FROM (
 
 SELECT
 a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
+d.indice_menace
 
 FROM t_taxon_observe a
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 
 WHERE gez_id_geom_zonage in ListeIdZonage
 
 
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) =3
-) f]]></xml-property>
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+HAVING MAX(indice_menace) < 4
+) f
+]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1536,100 +1712,52 @@ HAVING MAX(indice_menace) =3
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_Synth_MenacePerso" id="1993">
-            <list-property name="columnHints"/>
             <list-property name="parameters"/>
             <structure name="cachedMetaData"/>
-            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));
-
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
-            <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
-count(distinct(tao_id_taxon)) as total, 'Espèces menacées' as type_menace
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(tao_id_taxon)) as total, 'Espèces menacées' as type_menace
 FROM (
-
-SELECT
-a.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
-
-FROM t_taxon_observe a
- 
-JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
-JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
-LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-
-WHERE c.ota_id_obs_taxon in ListeIdObs
-
-
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) > 5 ) f
-
-UNION
-
-SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
-count(distinct(tao_id_taxon)) as total, 'Espèces quasi menacées et à données insuffisantes' as type_menace
-FROM (
-
-SELECT
-a.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
-
-FROM t_taxon_observe a
- 
-JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
-JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
-LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-
-WHERE c.ota_id_obs_taxon in ListeIdObs
-
-
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) >= 4 AND MAX(indice_menace) <= 5 ) f --nt et dd 
-
-UNION
-
-SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
-count(distinct(tao_id_taxon)) as total, 'Espèces à préoccupation mineure et espèces non évaluées' as type_menace
-FROM (
-
-SELECT
-a.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max
-
-FROM t_taxon_observe a
- 
-JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
-JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
-LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-
-WHERE c.ota_id_obs_taxon in ListeIdObs
-
-
-GROUP BY a.tao_id_taxon
-HAVING MAX(indice_menace) =3
+	SELECT a.tao_id_taxon, max(b.sta_nom_statut) AS max_statut_uicn, d.indice_menace
+	FROM t_taxon_observe a
+	JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+	LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
+	JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+	WHERE c.ota_id_obs_taxon IN ListeIdObs
+	GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+	HAVING MAX(indice_menace) > 5
 ) f
 
+UNION
+
+SELECT count(distinct(tao_id_taxon)) as total, 'espèces quasi menacées et à données insuffisantes' as type_menace
+FROM (
+	SELECT a.tao_id_taxon, max(b.sta_nom_statut) AS max_statut_uicn, d.indice_menace
+	FROM t_taxon_observe a
+	JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+	LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
+	JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+	WHERE c.ota_id_obs_taxon IN ListeIdObs
+	GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+	HAVING MAX(indice_menace) >= 4 AND MAX(indice_menace) <= 5
+) f --nt et dd 
+
+UNION
+
+SELECT count(distinct(tao_id_taxon)) as total, 'espèces à préoccupation mineure et espèces non évaluées' as type_menace
+FROM (
+	SELECT a.tao_id_taxon, max(b.sta_nom_statut) AS max_statut_uicn, d.indice_menace
+	FROM t_taxon_observe a
+	JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+	LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
+	JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+	WHERE c.ota_id_obs_taxon IN ListeIdObs
+	GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+	HAVING MAX(indice_menace) < 4
+) f
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1705,50 +1833,86 @@ HAVING MAX(indice_menace) =3
 this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
 ,'OC5'
-,'V25P1'
-,'V39P1'
-,'V70P2') THEN 'Protection nationale' 
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection
-
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection
 
 FROM param_table a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
-LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref AND b.tax_cd_nom = b.tax_cd_ref
+LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
-WHERE gez_id_geom_zonage in ListeIdZonage AND tar_id_rang >= 193
-GROUP BY type_protection
-) as query where type_protection !='z'-- on enlève les réglementations doublons
+WHERE gez_id_geom_zonage in ListeIdZonage
+AND c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
+,'gypaete1'
+,'IAAP'
+,'NA'
+,'NAR2'
+,'NAR3'
+,'NAR4'
+,'NAR5'
+,'NAR6'
+,'NEC1'
+,'NFM1'
+,'NI2'
+,'NI3'
+,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
+,'NMO2'
+,'NMO3'
+,'NMO4'
+,'NO3'
+,'NO4'
+,'NP1'
+,'NTAA1'
+,'NTM1'
+,'NV1'
+,'NV2'
+,'NVM'
+,'OC2'
+,'OC4'
+,'OC5'
+,'V39P1','IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01','RV43')
 
+GROUP BY type_protection,tao_id_taxon
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1811,50 +1975,86 @@ GROUP BY type_protection
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
-            <xml-property name="queryText"><![CDATA[SELECT * from (
-SELECT count(distinct(a.tao_id_taxon))
+            <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 
-'cricetus_1'
-,'E70P2'
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
 ,'gypaete1'
+,'IAAP'
+,'NA'
 ,'NAR2'
 ,'NAR3'
 ,'NAR4'
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
 ,'OC5'
-,'V25P1'
-,'V39P1'
-,'V70P2') THEN 'Protection nationale' 
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
-WHEN c.tae_cd_protection is null THEN ( 'Pas de protection et pas de réglementation' ) 
-ELSE ('z') END ) AS type_protection
-
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
+ELSE ( 'Pas de protection' ) END ) AS type_protection
 
 FROM t_observation_taxon a
 LEFT JOIN t_taxref b ON a.tao_id_taxon = b.tax_id_taxref
-LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref AND b.tax_cd_nom = b.tax_cd_ref
+LEFT JOIN tj_taxref_protection c ON b.tax_id_taxref = c.tax_id_taxref
+LEFT JOIN t_taxref_reglementation d ON c.tae_cd_protection = d.tae_cd_protection
 
-WHERE ota_id_obs_taxon in ListeIdObs AND tar_id_rang >= 193
-GROUP BY type_protection
-) as query where type_protection !='z'-- on enlève les réglementations doublons
+WHERE ota_id_obs_taxon IN ListeIdObs
+AND c.tae_cd_protection IN('CDO1'
+,'cricetus_1'
+,'gypaete1'
+,'IAAP'
+,'NA'
+,'NAR2'
+,'NAR3'
+,'NAR4'
+,'NAR5'
+,'NAR6'
+,'NEC1'
+,'NFM1'
+,'NI2'
+,'NI3'
+,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
+,'NMO2'
+,'NMO3'
+,'NMO4'
+,'NO3'
+,'NO4'
+,'NP1'
+,'NTAA1'
+,'NTM1'
+,'NV1'
+,'NV2'
+,'NVM'
+,'OC2'
+,'OC4'
+,'OC5'
+,'V39P1','IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01','RV43')
 
+GROUP BY type_protection,tao_id_taxon
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1938,48 +2138,51 @@ GROUP BY type_protection
             </list-property>
             <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('param_table', params["Nom_Table"]);
-this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
 count(distinct(tao_id_taxon)) as total, 'Espèces évaluées' as type_menace
 FROM (
+
 SELECT
-c.tao_id_taxon,
+a.tao_id_taxon,
 max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-tax_nom_vern
+d.indice_menace
 
 FROM t_taxon_observe a
-JOIN t_taxref zz ON a.tao_id_taxon = zz.tax_id_taxref
  
 JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
+JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
+LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+
+WHERE gez_id_geom_zonage in ListeIdZonage
+
+
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+HAVING MAX(indice_menace) >=3
+
+UNION
+
+SELECT
+a.tao_id_taxon,
+max(b.sta_nom_statut) AS max_statut_uicn,
+d.indice_menace
+
+FROM t_taxon_observe a
+ 
+JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 23
 JOIN param_table c ON a.tao_id_taxon = c.tao_id_taxon
 
 LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
 WHERE gez_id_geom_zonage in ListeIdZonage
 
 
-GROUP BY a.tao_id_taxon,tax_nom_vern,c.tao_id_taxon
+GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
 HAVING MAX(indice_menace) >=3
-order by tax_nom_vern) f]]></xml-property>
+ORDER BY tao_id_taxon) f]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -2035,51 +2238,36 @@ order by tax_nom_vern) f]]></xml-property>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_Synth_TotalMenacePerso" id="1997">
-            <list-property name="columnHints"/>
             <list-property name="parameters"/>
             <structure name="cachedMetaData"/>
-            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));
-
-//region B FC ou entre les deux ?
-var region=params["region"];
-
-if (region=="B" )
-{
-  	this.queryText=this.queryText.replaceAll('region', 66);
-}
-else if(region=="FC" )
-{
-	this.queryText=this.queryText.replaceAll('region', 33);
-}
-else
-{
-	this.queryText=this.queryText.replaceAll('region', 0);
-}]]></method>
+            <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('ListeIdObs', reportContext.getPageVariable("ListeIdObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
-            <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT --MAX(indice_menace) as menace_max,tao_id_taxon,
 count(distinct(tao_id_taxon)) as total, 'Espèces évaluées' as type_menace
 FROM (
-SELECT
-c.tao_id_taxon,
-max(b.sta_nom_statut) AS max_statut_uicn,
-Max(d.indice_menace) as indice_menace_max,
-tax_nom_vern
+	SELECT a.tao_id_taxon, max(b.sta_nom_statut) AS max_statut_uicn, d.indice_menace
+	FROM t_taxon_observe a
+	JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+	LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 33
+	JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+	WHERE c.ota_id_obs_taxon IN ListeIdObs
+	GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+	HAVING MAX(indice_menace) >=3
 
-FROM t_taxon_observe a
-JOIN t_taxref zz ON a.tao_id_taxon = zz.tax_id_taxref
- 
-JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
-LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND ( b.tst_id_type_statut = region OR b.tst_id_type_statut = 23)
-JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	UNION
 
-LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
-WHERE c.ota_id_obs_taxon in ListeIdObs
-
-
-GROUP BY a.tao_id_taxon,tax_nom_vern,c.tao_id_taxon
-HAVING MAX(indice_menace) >=3
-order by tax_nom_vern) f]]></xml-property>
+	SELECT a.tao_id_taxon, max(b.sta_nom_statut) AS max_statut_uicn, d.indice_menace
+	FROM t_taxon_observe a
+	JOIN tj_taxon_a_statut f ON a.tao_id_taxon = f.tao_id_taxon
+	LEFT OUTER JOIN tr_statut b ON f.sta_id_statut = b.sta_id_statut AND b.tst_id_type_statut = 23
+	JOIN t_observation_taxon c ON a.tao_id_taxon = c.tao_id_taxon
+	LEFT JOIN zz_qualif_menace d ON b.sta_nom_statut ilike d.sta_nom_statut
+	WHERE c.ota_id_obs_taxon IN ListeIdObs
+	GROUP BY upper(b.sta_nom_statut),a.tao_id_taxon,d.indice_menace
+	HAVING MAX(indice_menace) >=3
+	ORDER BY tao_id_taxon
+) f]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -2552,12 +2740,10 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT count(distinct(a.tao_id_taxon))
 
-,( CASE WHEN c.tae_cd_protection IN( 'CDO1' --europeen
+,( CASE WHEN c.tae_cd_protection IN('CDO1'
 ,'cricetus_1'
-,'E70P2'
 ,'gypaete1'
-,'IBO1' --international
-,'IBOAE'
+,'IAAP'
 ,'NA'
 ,'NAR2'
 ,'NAR3'
@@ -2565,25 +2751,30 @@ this.queryText = this.queryText.replace("echelon_geom", params["Tbl_Echelon"].re
 ,'NAR5'
 ,'NAR6'
 ,'NEC1'
+,'NFM1'
 ,'NI2'
 ,'NI3'
 ,'NM2'
+,'NMAMmar2'
+,'NMAMmar3'
+,'NMAMmar5'
 ,'NMO2'
 ,'NMO3'
 ,'NMO4'
 ,'NO3'
 ,'NO4'
 ,'NP1'
+,'NTAA1'
+,'NTM1'
 ,'NV1'
 ,'NV2'
+,'NVM'
 ,'OC2'
 ,'OC4'
 ,'OC5'
-,'V25P1'
-,'V39P1'
-,'V70P2') THEN 'Protection nationale' 
+,'V39P1') THEN 'Protection nationale' 
 WHEN c.tae_cd_protection In('IBOAC','IBOAE','IBOAS','IBOAW','IBOC','IBOEU','IBO1','CD01') THEN 'Protection internationale'
-WHEN c.tae_cd_protection = 'RV43' OR c.tae_cd_protection = 'RV26'  THEN 'Protection régionale' 
+WHEN c.tae_cd_protection = 'RV43' THEN 'Protection régionale' 
 ELSE ( 'Pas de protection' ) END ) AS type_protection
 
 FROM echelon_table a
@@ -3506,7 +3697,7 @@ FROM echelon_geom geom_a
 --echelon
 INNER JOIN base_geom geom_b ON ST_INTERSECTS(geom_a.gez_geometry, geom_b.gez_geometry)
 --
-INNER JOIN tv_geom_zonages_zones_humides zh ON ST_Intersects(geom_a.gez_geometry, zh.gez_geometry)
+INNER JOIN tv_geom_zonages_zones_humides_2015 zh ON ST_Intersects(geom_a.gez_geometry, zh.gez_geometry)
 WHERE geom_b.gez_id_geom_zonage = ?
 
 UNION ALL
@@ -3570,6 +3761,98 @@ GROUP BY
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>4</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>5</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes/>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -3731,7 +4014,7 @@ GROUP BY
 var mois = new Date().getMonth()+1;&#13;
 var jour = new Date().getDate();&#13;
 &#13;
-"&lt;a href=\"https://www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\"https://www.sigogne.org/mentions-legales\" target=\"_blank\" title=\"Accéder aux mentions légales de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+"&lt;a href=\"http://www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\"http://www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
                     <property name="contentType">html</property>
                 </text-data>
             </page-footer>
@@ -4215,37 +4498,6 @@ Bilan menace et règlementation des groupes d'espèces
     <Visible>true</Visible>
   </Block>
   <Dimension>Two_Dimensional</Dimension>
-  <Script>function beforeDrawDataPoint( dph, fill, icsc )&#xD;
-{&#xD;
- if( dph.getBaseDisplayValue() == &quot;Espèces menacées&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(255, 0, 0);&#xD;
-    }&#xD;
- if( dph.getBaseDisplayValue() == &quot;Espèces quasi menacées et à données insuffisantes&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(255, 128, 0);&#xD;
-    }&#xD;
- if( dph.getBaseDisplayValue() == &quot;Espèces à préoccupation mineure et espèces non évaluées&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(220, 220, 200);&#xD;
-    }&#xD;
-}&#xD;
-&#xD;
-function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
-{&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Espèces menacées&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(255, 0, 0);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Espèces quasi menacées et à données insuffisantes&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(255, 128, 0);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Espèces à préoccupation mineure et espèces non évaluées&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(220, 220, 200);&#xD;
-    }&#xD;
-}</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <GridColumnCount>0</GridColumnCount>
@@ -5133,47 +5385,6 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
     <Visible>true</Visible>
   </Block>
   <Dimension>Two_Dimensional</Dimension>
-  <Script>function beforeDrawDataPoint( dph, fill, icsc )&#xD;
-{&#xD;
- if( dph.getBaseDisplayValue() == &quot;Protection nationale&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(255, 87, 51);&#xD;
-    }&#xD;
- if( dph.getBaseDisplayValue() == &quot;Protection régionale&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(26, 82, 118);&#xD;
-    }&#xD;
- if( dph.getBaseDisplayValue() == &quot;Protection internationale&quot; ){&#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-	     fill.set(93, 173, 226);&#xD;
-	}&#xD;
-    &#xD;
- if( dph.getBaseDisplayValue() == &quot;Pas de protection et pas de réglementation&quot; ){&#xD;
-  importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        fill.set(220, 220, 200);&#xD;
-    }&#xD;
-    &#xD;
-}&#xD;
-&#xD;
-function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
-{&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Protection nationale&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(255, 87, 51);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Protection régionale&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(26, 82, 118);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Protection internationale&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(93, 173, 226);&#xD;
-    }&#xD;
-  if( lerh.getLabel().getCaption().getValue() == &quot;Pas de protection et pas de réglementation&quot;){              &#xD;
-   importPackage( Packages.org.eclipse.birt.chart.model.attribute.impl );&#xD;
-        lerh.getFill().set(220, 220, 220);&#xD;
-    }&#xD;
-}</Script>
   <Units>Points</Units>
   <SeriesThickness>10.0</SeriesThickness>
   <GridColumnCount>0</GridColumnCount>
@@ -5823,6 +6034,13 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
                         </column>
                         <row id="716">
                             <cell id="717">
+                                <text name="Titre bilan milieux et habitats" id="47">
+                                    <property name="marginTop">20px</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<FONT size="4"><B>
+Bilan milieux et habitats naturels
+</B></FONT>]]></text-property>
+                                </text>
                                 <table name="EBZR_Tbl_Bilan_Milieux_Habitats" id="612">
                                     <property name="width">3.3229166666666665in</property>
                                     <property name="dataSet">EBZR_Synth_BilanMilieux</property>
@@ -5943,13 +6161,6 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
                                         </row>
                                     </detail>
                                 </table>
-                                <text name="Titre bilan milieux et habitats" id="47">
-                                    <property name="marginTop">20px</property>
-                                    <property name="contentType">html</property>
-                                    <text-property name="content"><![CDATA[<FONT size="4"><B>
-Bilan milieux et habitats naturels
-</B></FONT>]]></text-property>
-                                </text>
                             </cell>
                             <cell id="718">
                                 <text name="Plus d'info bilan milieux et habitats" id="704">
@@ -6038,43 +6249,6 @@ Bilan milieux et habitats naturels
                         </row>
                     </grid>
                 </cell>
-            </row>
-        </grid>
-        <grid id="2123">
-            <list-property name="visibility">
-                <structure>
-                    <property name="format">all</property>
-                    <expression name="valueExpr" type="javascript">params["region"].value=='FC' || params["region"].value=='B'</expression>
-                </structure>
-            </list-property>
-            <column id="2124"/>
-            <row id="2132">
-                <property name="height">0.24166666666666667in</property>
-                <cell id="2133"/>
-            </row>
-            <row id="2125">
-                <property name="height">0.24166666666666667in</property>
-                <cell id="2126">
-                    <text id="2131">
-                        <property name="fontSize">12pt</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="color">#FF0000</property>
-                        <property name="textAlign">left</property>
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Attention,]]></text-property>
-                    </text>
-                </cell>
-            </row>
-            <row id="2127">
-                <cell id="2128">
-                    <text id="2130">
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[votre synthèse concerne un territoire à la fois en Bourgogne et en Franche-Comté, la menace affichée se base sur la liste rouge nationale. Vous pourrez retrouver les statuts de menace des listes régionales dans les onglets ‘Espèces triées par enjeu’ ou ‘Espèces tous statuts’.]]></text-property>
-                    </text>
-                </cell>
-            </row>
-            <row id="2134">
-                <cell id="2135"/>
             </row>
         </grid>
     </body>
