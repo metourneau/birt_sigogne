@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
     <property name="units">in</property>
     <method name="initialize"><![CDATA[if(params["FileObs"]!="") {
 	// Périmetre personnalisé
@@ -138,7 +138,7 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
@@ -146,6 +146,7 @@ if(params["Tbl_Echelon"]!="") {
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeHabitatsMilieux_MN" id="708">
             <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints"/>
             <list-property name="parameters">
                 <structure>
                     <property name="name">param_1</property>
@@ -163,12 +164,13 @@ if(params["Tbl_Echelon"]!="") {
             <method name="beforeOpen"><![CDATA[var sArr = params["Nom_Table"].value.split("_") ; this.queryText=this.queryText.replaceAll('param_table_geom', 'tv_geom_zonages_'+sArr[3]);
 this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageVariable("ListeIdZonage"));]]></method>
             <property name="dataSource">Sigogne3</property>
+            <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT DISTINCT (cob.cob_lb_cb97_fr) AS biotope,
 cob_cb_cd,
 row_number() over(ORDER BY cob.cob_lb_cb97_fr),
 n2000,
 ( CASE WHEN n2000 ='0' THEN 'non' ELSE ( 'oui' ) END ) AS patrimonial ,
-( CASE WHEN n2000 ='p' OR n2000 ='PR' THEN 'a' WHEN n2000 = 'c' OR n2000 ='IC' THEN 'b' WHEN n2000 = 'r' OR n2000 ='IF' OR n2000 ='IR' THEN 'c'  ELSE ( 'z' ) END ) AS toto,
+( CASE WHEN n2000 ='p' THEN 'a' WHEN n2000 = 'c' THEN 'b' WHEN n2000 = 'r' THEN 'c'  ELSE ( 'z' ) END ) AS toto ,
     
 CAST(ROUND(SUM(CAST(t.surface AS NUMERIC)), 2) AS FLOAT) AS surface
 
@@ -572,149 +574,16 @@ ORDER BY toto ASC,cob_cb_cd DESC;]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_ListeHabitatsMilieux_MNPerso" id="1975">
             <property name="nullsOrdering">nulls lowest</property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">biotope</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">biotope</text-property>
-                    <text-property name="heading">biotope</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">cob_cb_cd</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">cob_cb_cd</text-property>
-                    <text-property name="heading">cob_cb_cd</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">row_number</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">row_number</text-property>
-                    <text-property name="heading">row_number</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">n2000</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">n2000</text-property>
-                    <text-property name="heading">n2000</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">patrimonial</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">patrimonial</text-property>
-                    <text-property name="heading">patrimonial</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">toto</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">toto</text-property>
-                    <text-property name="heading">toto</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">surface</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">surface</text-property>
-                    <text-property name="heading">surface</text-property>
-                </structure>
-            </list-property>
             <list-property name="parameters"/>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">biotope</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">cob_cb_cd</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">row_number</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">n2000</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">patrimonial</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">toto</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">surface</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <method name="beforeOpen"><![CDATA[this.queryText=this.queryText.replaceAll('WKTArea', reportContext.getPageVariable("GeomObs"));]]></method>
             <property name="dataSource">Sigogne3</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">biotope</property>
-                    <property name="nativeName">biotope</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">cob_cb_cd</property>
-                    <property name="nativeName">cob_cb_cd</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">row_number</property>
-                    <property name="nativeName">row_number</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">n2000</property>
-                    <property name="nativeName">n2000</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">patrimonial</property>
-                    <property name="nativeName">patrimonial</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">toto</property>
-                    <property name="nativeName">toto</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">surface</property>
-                    <property name="nativeName">surface</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">8</property>
-                </structure>
-            </list-property>
             <xml-property name="queryText"><![CDATA[SELECT DISTINCT (cob.cob_lb_cb97_fr) AS biotope,
 cob_cb_cd,
 row_number() over(ORDER BY cob.cob_lb_cb97_fr),
 n2000,
 ( CASE WHEN n2000 ='0' THEN 'non' ELSE ( 'oui' ) END ) AS patrimonial ,
-( CASE WHEN n2000 ='p' OR n2000 ='PR' THEN 'a' WHEN n2000 = 'c' OR n2000 ='IC' THEN 'b' WHEN n2000 = 'r' OR n2000 ='IF' OR n2000 ='IR' THEN 'c'  ELSE ( 'z' ) END ) AS toto,
+( CASE WHEN n2000 ='p' THEN 'a' WHEN n2000 = 'c' THEN 'b' WHEN n2000 = 'r' THEN 'c'  ELSE ( 'z' ) END ) AS toto ,
     
 CAST(ROUND(SUM(CAST(t.surface AS NUMERIC)), 2) AS FLOAT) AS surface
 
@@ -1145,9 +1014,9 @@ z_env_type_inv_zh AS "Type d'inventaire",
 z_env_nom_orga_zh AS "Maître d'ouvrage de l'inventaire",
 substring(z_env_date_maj_zh,1,4) || '-' || substring(z_env_date_maj_zh,5,2) || '-' || substring(z_env_date_maj_zh,7,2) AS "Date de mise à jour",
 z_env_fiche_zh AS "Lien vers la fiche site",
-REPLACE (z_env_fiche_zh,'fiche_pdf','fiche_detail_pdf') AS "Lien vers la fiche détaillée"
+z_env_fiche_detaillee AS "Lien vers la fiche détaillée"
 
-FROM tv_geom_zonages_zones_humides t
+FROM tv_geom_zonages_zones_humides_2015 t
 JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.gez_geometry)
 
 WHERE gzc.gez_id_geom_zonage in ListeIdZonage
@@ -1355,9 +1224,9 @@ z_env_type_inv_zh AS "Type d'inventaire",
 z_env_nom_orga_zh AS "Maître d'ouvrage de l'inventaire",
 substring(z_env_date_maj_zh,1,4) || '-' || substring(z_env_date_maj_zh,5,2) || '-' || substring(z_env_date_maj_zh,7,2) AS "Date de mise à jour",
 z_env_fiche_zh AS "Lien vers la fiche site",
-REPLACE (z_env_fiche_zh,'fiche_pdf','fiche_detail_pdf') AS "Lien vers la fiche détaillée"
+z_env_fiche_detaillee AS "Lien vers la fiche détaillée"
 
-FROM tv_geom_zonages_zones_humides d
+FROM tv_geom_zonages_zones_humides_2015 d
 
 WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),d.gez_geometry)
 
@@ -1905,14 +1774,14 @@ z_env_type_inv_zh AS "Type d'inventaire",
 z_env_nom_orga_zh AS "Maître d'ouvrage de l'inventaire",
 substring(z_env_date_maj_zh,1,4) || '-' || substring(z_env_date_maj_zh,5,2) || '-' || substring(z_env_date_maj_zh,7,2) AS "Date de mise à jour",
 z_env_fiche_zh AS "Lien vers la fiche site",
-REPLACE (z_env_fiche_zh,'fiche_pdf','fiche_detail_pdf') AS "Lien vers la fiche détaillée"
+z_env_fiche_detaillee AS "Lien vers la fiche détaillée"
 
 
 FROM echelon_geom geom_a
  
 INNER JOIN base_geom geom_b ON ST_INTERSECTS(geom_a.gez_geometry, geom_b.gez_geometry)
 --
-INNER JOIN tv_geom_zonages_zones_humides m ON ST_intersects(geom_a.gez_geometry, m.gez_geometry)
+INNER JOIN tv_geom_zonages_zones_humides_2015 m ON ST_intersects(geom_a.gez_geometry, m.gez_geometry)
 WHERE geom_b.gez_id_geom_zonage = ?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="EBZR_DiagrammeTypeMilieu_ZH" id="2183">
@@ -1936,7 +1805,7 @@ this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageV
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT round(sum(z_env_surf_zh::float)) as count,z_env_type_milieu_zh AS "Type de milieu humide"
-FROM tv_geom_zonages_zones_humides t
+FROM tv_geom_zonages_zones_humides_2015 t
 JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.gez_geometry)
 WHERE gzc.gez_id_geom_zonage in ListeIdZonage
 group by z_env_type_milieu_zh]]></xml-property>
@@ -1962,7 +1831,7 @@ this.queryText=this.queryText.replaceAll('ListeIdZonage', reportContext.getPageV
             <property name="dataSource">Sigogne3</property>
             <list-property name="resultSet"/>
             <xml-property name="queryText"><![CDATA[SELECT round(sum(z_env_surf_zh::float)) as count,z_env_type_inv_zh AS "Type d'inventaire"
-FROM tv_geom_zonages_zones_humides t
+FROM tv_geom_zonages_zones_humides_2015 t
 JOIN param_table_geom gzc ON ST_INTERSECTS(gzc.gez_geometry, t.gez_geometry)
 WHERE gzc.gez_id_geom_zonage in ListeIdZonage
 group by z_env_type_inv_zh]]></xml-property>
@@ -2016,7 +1885,7 @@ group by z_env_type_inv_zh]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT round(sum(z_env_surf_zh::float)) as count,z_env_type_inv_zh AS "Type d'inventaire"
-FROM tv_geom_zonages_zones_humides d
+FROM tv_geom_zonages_zones_humides_2015 d
 WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),d.gez_geometry)
 group by z_env_type_inv_zh]]></xml-property>
         </oda-data-set>
@@ -2069,7 +1938,7 @@ group by z_env_type_inv_zh]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT round(sum(z_env_surf_zh::float)) as count,z_env_type_milieu_zh AS "Type de milieu humide"
-FROM tv_geom_zonages_zones_humides d
+FROM tv_geom_zonages_zones_humides_2015 d
 WHERE ST_INTERSECTS(St_Transform(ST_GeomFromText('WKTArea', 3857), 2154),d.gez_geometry)
 group by z_env_type_milieu_zh]]></xml-property>
         </oda-data-set>
@@ -2175,9 +2044,8 @@ group by z_env_type_milieu_zh]]></xml-property>
                     <expression name="valueExpr">var annee = new Date().getFullYear();&#13;
 var mois = new Date().getMonth()+1;&#13;
 var jour = new Date().getDate();&#13;
-var protocol = window.location.protocol;&#13;
 &#13;
-"&lt;a href=\""+protocol+"//www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">"+protocol+"//www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\""+protocol+"//www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+"&lt;a href=\"http://www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\"http://www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
                     <property name="contentType">html</property>
                 </text-data>
             </page-footer>
@@ -2443,42 +2311,6 @@ var protocol = window.location.protocol;&#13;
                                                         <value type="javascript">'p'</value>
                                                     </simple-property-list>
                                                 </structure>
-                                                <structure>
-                                                    <property name="operator">eq</property>
-                                                    <property name="backgroundColor">#FF8000</property>
-                                                    <property name="color">#000000</property>
-                                                    <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                    <simple-property-list name="value1">
-                                                        <value type="javascript">'IC'</value>
-                                                    </simple-property-list>
-                                                </structure>
-                                                <structure>
-                                                    <property name="operator">eq</property>
-                                                    <property name="backgroundColor">#FFFF80</property>
-                                                    <property name="color">#000000</property>
-                                                    <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                    <simple-property-list name="value1">
-                                                        <value type="javascript">'IR'</value>
-                                                    </simple-property-list>
-                                                </structure>
-                                                <structure>
-                                                    <property name="operator">eq</property>
-                                                    <property name="backgroundColor">#FFFF80</property>
-                                                    <property name="color">#000000</property>
-                                                    <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                    <simple-property-list name="value1">
-                                                        <value type="javascript">'IF'</value>
-                                                    </simple-property-list>
-                                                </structure>
-                                                <structure>
-                                                    <property name="operator">eq</property>
-                                                    <property name="backgroundColor">#FF0000</property>
-                                                    <property name="color">#000000</property>
-                                                    <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                    <simple-property-list name="value1">
-                                                        <value type="javascript">'PR'</value>
-                                                    </simple-property-list>
-                                                </structure>
                                             </list-property>
                                             <list-property name="visibility">
                                                 <structure>
@@ -2521,38 +2353,6 @@ var protocol = window.location.protocol;&#13;
                                                             <property name="operator">eq</property>
                                                             <simple-property-list name="value1">
                                                                 <value type="javascript">'r'</value>
-                                                            </simple-property-list>
-                                                            <text-property name="display">r ( habitat d'intérêt régional)</text-property>
-                                                        </structure>
-                                                        <structure>
-                                                            <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                            <property name="operator">eq</property>
-                                                            <simple-property-list name="value1">
-                                                                <value type="javascript">'IC'</value>
-                                                            </simple-property-list>
-                                                            <text-property name="display">c (habitat d'intérêt communautaire)</text-property>
-                                                        </structure>
-                                                        <structure>
-                                                            <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                            <property name="operator">eq</property>
-                                                            <simple-property-list name="value1">
-                                                                <value type="javascript">'PR'</value>
-                                                            </simple-property-list>
-                                                            <text-property name="display">p (habitat prioritaire)</text-property>
-                                                        </structure>
-                                                        <structure>
-                                                            <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                            <property name="operator">eq</property>
-                                                            <simple-property-list name="value1">
-                                                                <value type="javascript">'IR'</value>
-                                                            </simple-property-list>
-                                                            <text-property name="display">r ( habitat d'intérêt régional)</text-property>
-                                                        </structure>
-                                                        <structure>
-                                                            <expression name="testExpr" type="javascript">row["n2000"]</expression>
-                                                            <property name="operator">eq</property>
-                                                            <simple-property-list name="value1">
-                                                                <value type="javascript">'IF'</value>
                                                             </simple-property-list>
                                                             <text-property name="display">r ( habitat d'intérêt régional)</text-property>
                                                         </structure>

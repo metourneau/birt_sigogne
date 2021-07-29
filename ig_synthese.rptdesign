@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.5.0.v201506092134 Build &lt;@BUILD@></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <simple-property-list name="includeResource">
         <value>images/Messages_fr</value>
     </simple-property-list>
@@ -197,7 +197,7 @@ if(params["Tbl_Echelon"]!="") {
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://91.206.199.53:5432/mefc</property>
+            <property name="odaURL">jdbc:postgresql://91.206.199.61:5432/mefc</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">UGdGb3JTaWcwZ24/</encrypted-property>
         </oda-data-source>
@@ -392,7 +392,7 @@ AND ota_date_debut <> '' AND ota_date_debut IS NOT NULL
 GROUP BY anciennete,ota_date_debut
 ) t]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="https://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="https://www.eclipse.org/birt/report/model/adapter/odaModel">
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
   <DataSetParameters>
     <parameter>
@@ -497,7 +497,7 @@ AND ota_date_debut <> '' AND ota_date_debut IS NOT NULL
 GROUP BY anciennete,ota_date_debut
 ) t]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="https://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="https://www.eclipse.org/birt/report/model/adapter/odaModel">
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
   <DataSetParameters>
     <parameter>
@@ -785,7 +785,7 @@ AND b.gez_id_geom_zonage = ?)
 GROUP BY gta_nom_groupe_taxonomique,b.gta_id_groupe_taxonomique,seuil1_connaissance,seuil2_connaissance
 ORDER BY gta_nom_groupe_taxonomique]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="https://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="https://www.eclipse.org/birt/report/model/adapter/odaModel">
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
@@ -1019,9 +1019,8 @@ function beforeDrawLegendItem( lerh, bounds, icsc )
                     <expression name="valueExpr">var annee = new Date().getFullYear();&#13;
 var mois = new Date().getMonth()+1;&#13;
 var jour = new Date().getDate();&#13;
-var protocol = window.location.protocol;&#13;
 &#13;
-"&lt;a href=\""+protocol+"//www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">"+protocol+"//www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\""+protocol+"//www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
+"&lt;a href=\"http://www.sigogne.org\" target=\"_blank\" title=\"Site Internet de Sigogne\">www.sigogne.org &lt;/a>" + " || Page générée le "  + jour + "/" + mois + "/" + annee +   " || " + "&lt;a href=\"http://www.sigogne.org/stockage/Licence_sigogne.pdf\" target=\"_blank\" title=\"Télécharger le PDF de la licence d'utilisation de Sigogne\"> Licence d\'utilisation de Sigogne&lt;/a>"</expression>
                     <property name="contentType">html</property>
                 </text-data>
             </page-footer>
@@ -1153,7 +1152,7 @@ var protocol = window.location.protocol;&#13;
                         <property name="marginRight">auto</property>
                         <property name="width">60%</property>
                         <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<FONT size="4"><B>Chefs de file</B></FONT><BR/>
+                        <text-property name="content"><![CDATA[<FONT size="4"><B>Animateurs</B></FONT><BR/>
 ]]></text-property>
                     </text>
                 </cell>
@@ -3094,7 +3093,7 @@ function beforeDrawLegendItem( lerh, bounds, icsc )&#xD;
                     <text name="Avertissement (Modifiable)" id="52">
                         <property name="marginTop">30px</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Attention, cette synthèse n'est que la photographie de la situation à un instant T sur un territoire donné. En aucun cas elle ne peut être considérée comme exhaustive. Attention lors de l'interprétation, l'absence d'une espèce dans la liste peut simplement provenir d'une prospection lacunaire, en aucun cas cela dispense d'une investigation lors de projet. Merci de vous rapprocher des chefs de file pour des expertises adaptées.]]></text-property>
+                        <text-property name="content"><![CDATA[Attention, cette synthèse n'est que la photographie de la situation à un instant t sur un territoire donné, en aucun cas elle ne peut être considérée comme exhaustive. Attention lors de l'interprétation, l'absence d'une espèce dans la liste peut simplement provenir d'une prospection lacunaire, en aucun cas cela dispense d'une investigation lors de projet. Merci de vous rapprocher des animateurs de réseau de collecte pour des expertises adaptées.]]></text-property>
                     </text>
                 </cell>
             </row>
